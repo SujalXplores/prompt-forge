@@ -1,25 +1,21 @@
 # PromptForge 🧙‍♂️
 
-A premium, scalable prompt enhancement application that transforms your prompts using AI-powered techniques and professional engineering practices.
+A premium, scalable prompt enhancement application that transforms your prompts using AI-powered techniques and professional engineering practices, built with Vercel AI Elements.
 
 ![PromptForge Preview](https://your-image-url.com/preview.png)
 
 ## ✨ Features
 
 ### 🤖 AI-Powered Enhancement
+- **Vercel AI Elements** integration for polished chat interfaces
 - **Real-time streaming** responses using Vercel AI SDK v5
 - **Multiple AI models** via OpenRouter (GPT-4o, Claude 3.5, Gemini Pro, Llama 3.1)
 - **8 enhancement techniques**: Chain of Thought, Few-Shot, Zero-Shot, Role-Based, Meta-Prompting, Tree of Thought, Self-Consistency, Structured Output
 - **4 output formats**: Plain Text, Markdown, JSON, XML
 
-### 🔐 Authentication & Security
-- **Clerk authentication** with social logins
-- **Rate limiting** and request logging
-- **User tier management** (Free, Pro, Enterprise)
-- **Protected routes** and secure API endpoints
-
-### 🎨 Premium UI/UX
-- **ReUI components** with glassmorphism design
+### 🎨 Modern UI Components
+- **AI Elements** - Pre-built polished components (Message, Response, PromptInput, Actions, etc.)
+- **shadcn/ui** components with glassmorphism design
 - **Dark/light theme** support with system detection
 - **Framer Motion animations** for smooth interactions
 - **Responsive design** for all screen sizes
@@ -37,13 +33,25 @@ A premium, scalable prompt enhancement application that transforms your prompts 
 | Category | Technology |
 |----------|------------|
 | **Frontend** | React 19, TypeScript, Vite |
-| **Styling** | Tailwind CSS, ReUI Components |
+| **UI Components** | Vercel AI Elements, shadcn/ui |
+| **Styling** | Tailwind CSS |
 | **Animation** | Framer Motion |
 | **Authentication** | Clerk React SDK |
 | **AI Integration** | Vercel AI SDK v5, OpenRouter |
 | **State Management** | React Hook Form, TanStack Query |
-| **Icons** | Remix Icons |
+| **Icons** | Remix Icons, Lucide Icons |
 | **Notifications** | Sonner |
+
+## 🎨 AI Elements Integration
+
+This application leverages Vercel AI Elements for a polished chat interface:
+
+- **Message Components**: Styled user and assistant messages with avatars
+- **Response**: Streamdown-powered markdown rendering
+- **PromptInput**: Enhanced input with model selection and toolbars  
+- **Actions**: Copy, save, export buttons with tooltips
+- **Suggestions**: Quick-start prompt suggestions
+- **Loader**: Animated loading indicators
 
 ## 📋 Prerequisites
 

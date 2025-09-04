@@ -307,12 +307,12 @@ export function PromptWorkspace() {
                   <RiMagicFill className="w-5 h-5" />
                   Original Prompt
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span>{getCharCount(inputPrompt)} chars</span>
-                  <span>•</span>
-                  <span>{getTokenCount(inputPrompt)} tokens</span>
-                </div>
               </CardTitle>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <span>{getCharCount(inputPrompt)} chars</span>
+                <span>•</span>
+                <span>{getTokenCount(inputPrompt)} tokens</span>
+              </div>
             </CardHeader>
             <CardContent className="flex-1 flex flex-col gap-4">
               <Textarea
@@ -373,7 +373,6 @@ export function PromptWorkspace() {
           </Card>
         </div>
 
-        {/* Output Panel */}
         <div className="flex flex-col">
           <Card className="h-full flex flex-col">
             <CardHeader>
@@ -384,14 +383,14 @@ export function PromptWorkspace() {
                   </div>
                   Enhanced Prompt
                 </div>
-                {enhancedContent && (
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{getCharCount(enhancedContent)} chars</span>
-                    <span>•</span>
-                    <span>{getTokenCount(enhancedContent)} tokens</span>
-                  </div>
-                )}
               </CardTitle>
+              {enhancedContent && (
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span>{getCharCount(enhancedContent)} chars</span>
+                  <span>•</span>
+                  <span>{getTokenCount(enhancedContent)} tokens</span>
+                </div>
+              )}
             </CardHeader>
             <CardContent className="flex-1 flex flex-col gap-4">
               <div className="flex-1 bg-muted/50 border rounded-lg p-4 overflow-y-auto relative">
