@@ -1,7 +1,6 @@
-import { AppHeader } from '@/components/layout/AppHeader'
-import { AppSidebar } from '@/components/layout/AppSidebar'
-import { PromptWorkspace } from '@/components/enhancement/PromptWorkspace'
-import { motion } from 'framer-motion'
+import { AppHeader } from '@/components/layout/AppHeader';
+import { AppSidebar } from '@/components/layout/AppSidebar';
+import { PromptWorkspace } from '@/components/enhancement/PromptWorkspace';
 
 export default function Dashboard() {
   return (
@@ -9,15 +8,10 @@ export default function Dashboard() {
       <AppHeader />
       <div className="flex-1 flex">
         <AppSidebar />
-        <motion.main 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="flex-1 flex flex-col"
-        >
+        <main className="flex-1 flex flex-col">
           <PromptWorkspace />
-        </motion.main>
+        </main>
       </div>
     </div>
-  )
+  );
 }
