@@ -44,9 +44,7 @@ export function AppSidebar() {
   }, [loadStats]);
 
   return (
-    <aside
-      className="w-80 h-full bg-background border-r p-6 space-y-6 overflow-y-auto"
-    >
+    <aside className="w-80 h-full bg-background border-r p-6 space-y-6 overflow-y-auto">
       {/* Enhancement Techniques */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
