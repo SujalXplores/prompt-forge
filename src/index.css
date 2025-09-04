@@ -64,6 +64,65 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+/* Mobile-first responsive utilities */
+@layer utilities {
+  .mobile-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .mobile-margin {
+    @apply mx-4 sm:mx-6 lg:mx-8;
+  }
+
+  .responsive-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6;
+  }
+
+  .mobile-stack {
+    @apply flex flex-col space-y-3 sm:space-y-4 lg:space-y-6;
+  }
+
+  .mobile-container {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .mobile-text {
+    @apply text-sm sm:text-base;
+  }
+
+  .mobile-heading {
+    @apply text-xl sm:text-2xl lg:text-3xl;
+  }
+
+  .mobile-subheading {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+
+  .mobile-button {
+    @apply px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm;
+  }
+
+  .mobile-input {
+    @apply text-sm sm:text-base px-3 py-2 sm:px-4 sm:py-2.5;
+  }
+
+  .mobile-card {
+    @apply p-3 sm:p-4 lg:p-6;
+  }
+
+  .mobile-spacing {
+    @apply space-y-2 sm:space-y-3 lg:space-y-4;
+  }
+
+  .mobile-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6;
+  }
+
+  .mobile-flex {
+    @apply flex flex-col sm:flex-row gap-3 sm:gap-4;
   }
 }
