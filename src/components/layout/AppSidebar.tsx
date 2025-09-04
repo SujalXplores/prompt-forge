@@ -16,7 +16,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { ENHANCEMENT_TECHNIQUES } from '@/lib/ai-config';
-import { motion } from 'motion/react';
 import { useUsageStats } from '@/hooks/use-ai-enhancement';
 import { useEffect } from 'react';
 
@@ -45,9 +44,7 @@ export function AppSidebar() {
   }, [loadStats]);
 
   return (
-    <motion.aside
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
+    <aside
       className="w-80 h-full bg-background border-r p-6 space-y-6 overflow-y-auto"
     >
       {/* Enhancement Techniques */}
@@ -62,12 +59,7 @@ export function AppSidebar() {
               iconMap[technique.icon as keyof typeof iconMap] || RiMagicFill;
 
             return (
-              <motion.div
-                key={technique.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
+              <div key={technique.id}>
                 <Card className="cursor-pointer hover:bg-accent transition-colors group">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
@@ -83,7 +75,7 @@ export function AppSidebar() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -94,11 +86,8 @@ export function AppSidebar() {
         <h3 className="text-lg font-semibold">Quick Actions</h3>
         <div className="space-y-2">
           {sidebarItems.map((item, index) => (
-            <motion.div
+            <div
               key={item.name}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 + index * 0.05 }}
               className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent cursor-pointer transition-colors group"
             >
               <item.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -108,17 +97,13 @@ export function AppSidebar() {
                   {item.count}
                 </Badge>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Usage Stats */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-      >
+      <div>
         <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
           <CardHeader>
             <CardTitle className="text-base">Usage This Month</CardTitle>
@@ -160,14 +145,10 @@ export function AppSidebar() {
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
 
       {/* Quick Tips */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-      >
+      <div>
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
@@ -183,7 +164,7 @@ export function AppSidebar() {
             </p>
           </CardContent>
         </Card>
-      </motion.div>
-    </motion.aside>
+      </div>
+    </aside>
   );
 }

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import {
   RiMagicFill,
   RiClipboardLine,
@@ -8,7 +7,6 @@ import {
   RiPlayFill,
   RiStopFill,
   RiSaveLine,
-  RiHistoryLine,
   RiRefreshLine,
   RiInformationLine,
 } from '@remixicon/react';
@@ -147,11 +145,7 @@ export function PromptWorkspace() {
   return (
     <div className="flex-1 p-6 space-y-6">
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col lg:flex-row lg:items-center justify-between gap-4"
-      >
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
             Prompt Enhancement
@@ -230,79 +224,64 @@ export function PromptWorkspace() {
             <TooltipContent>Advanced Settings</TooltipContent>
           </Tooltip>
         </div>
-      </motion.div>
+      </div>
 
       {/* Advanced Settings Panel */}
-      <AnimatePresence>
-        {showAdvanced && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden"
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  Advanced Configuration
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Model Info</label>
-                    <div className="p-3 bg-muted rounded-lg">
-                      <p className="text-sm font-medium">
-                        {selectedModelConfig?.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        Max tokens:{' '}
-                        {selectedModelConfig?.maxTokens.toLocaleString()}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        Cost: ${selectedModelConfig?.costPer1kTokens}/1k tokens
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Technique Info
-                    </label>
-                    <div className="p-3 bg-muted rounded-lg">
-                      <p className="text-sm font-medium">
-                        {selectedTechniqueConfig?.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {selectedTechniqueConfig?.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Output Format</label>
-                    <div className="p-3 bg-muted rounded-lg">
-                      <p className="text-sm font-medium">
-                        {selectedFormatConfig?.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {selectedFormatConfig?.description}
-                      </p>
-                    </div>
+      {showAdvanced && (
+        <div>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Advanced Configuration</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Model Info</label>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <p className="text-sm font-medium">
+                      {selectedModelConfig?.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Max tokens:{' '}
+                      {selectedModelConfig?.maxTokens.toLocaleString()}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Cost: ${selectedModelConfig?.costPer1kTokens}/1k tokens
+                    </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Technique Info</label>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <p className="text-sm font-medium">
+                      {selectedTechniqueConfig?.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {selectedTechniqueConfig?.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Output Format</label>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <p className="text-sm font-medium">
+                      {selectedFormatConfig?.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {selectedFormatConfig?.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       {/* Usage Stats */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-      >
+      <div>
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between mb-2">
@@ -315,17 +294,12 @@ export function PromptWorkspace() {
             <Progress value={stats.usagePercentage || 0} className="h-2" />
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
 
       {/* Main Workspace */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[calc(100vh-20rem)]">
         {/* Input Panel */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-col"
-        >
+        <div className="flex flex-col">
           <Card className="h-full flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
@@ -397,15 +371,10 @@ export function PromptWorkspace() {
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </div>
 
         {/* Output Panel */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="flex flex-col"
-        >
+        <div className="flex flex-col">
           <Card className="h-full flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
@@ -452,22 +421,14 @@ export function PromptWorkspace() {
                     </div>
                   </div>
                 ) : enhancedContent ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="space-y-2"
-                  >
+                  <div className="space-y-2">
                     <pre className="font-mono text-sm whitespace-pre-wrap leading-relaxed">
                       {enhancedContent}
                       {isEnhancing && (
-                        <motion.span
-                          animate={{ opacity: [1, 0, 1] }}
-                          transition={{ duration: 1, repeat: Infinity }}
-                          className="inline-block w-2 h-5 bg-primary ml-1"
-                        />
+                        <span className="inline-block w-2 h-5 bg-primary ml-1" />
                       )}
                     </pre>
-                  </motion.div>
+                  </div>
                 ) : (
                   <div className="flex items-center justify-center h-full text-muted-foreground">
                     <div className="text-center space-y-2">
@@ -525,7 +486,7 @@ export function PromptWorkspace() {
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
