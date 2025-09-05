@@ -1,4 +1,4 @@
-# PromptForge 🧙‍♂️
+# Prompt Forge 🧙‍♂️
 
 A premium, scalable prompt enhancement application that transforms your prompts using AI-powered techniques and professional engineering practices, built with Vercel AI Elements.
 

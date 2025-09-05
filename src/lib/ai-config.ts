@@ -51,53 +51,45 @@ export interface UserTier {
 }
 
 export const AI_MODELS: Record<string, ModelConfig> = {
-  'openai/gpt-4o': {
-    id: 'openai/gpt-4o',
-    name: 'GPT-4o',
-    provider: 'OpenAI',
+  'deepseek/deepseek-chat-v3-0324': {
+    id: 'deepseek/deepseek-chat-v3-0324',
+    name: 'DeepSeek v3',
+    provider: 'DeepSeek',
     maxTokens: 128000,
-    costPer1kTokens: 0.03,
-    description: 'Latest GPT-4 with improved reasoning',
+    costPer1kTokens: 0.00,
+    description: '🚀 Advanced reasoning with zero cost',
   },
-  'anthropic/claude-3.5-sonnet': {
-    id: 'anthropic/claude-3.5-sonnet',
-    name: 'Claude 3.5 Sonnet',
+  'google/gemini-2.5-pro': {
+    id: 'google/gemini-2.5-pro',
+    name: 'Gemini 2.5 Pro',
+    provider: 'Google',
+    maxTokens: 1000000,
+    costPer1kTokens: 0.0075,
+    description: '💎 Premium performance at accessible pricing',
+  },
+  'anthropic/claude-opus-4.1': {
+    id: 'anthropic/claude-opus-4.1',
+    name: 'Claude Opus 4.1',
     provider: 'Anthropic',
     maxTokens: 200000,
     costPer1kTokens: 0.015,
-    description: 'Advanced reasoning and analysis',
+    description: '🧠 Ultimate analytical precision for complex tasks',
   },
-  'google/gemini-1.5-pro': {
-    id: 'google/gemini-1.5-pro',
-    name: 'Gemini 1.5 Pro',
+  'google/gemini-2.5-flash': {
+    id: 'google/gemini-2.5-flash',
+    name: 'Gemini 2.5 Flash',
     provider: 'Google',
-    maxTokens: 2000000,
-    costPer1kTokens: 0.0035,
-    description: 'Massive context window',
-  },
-  'meta/llama-3.1-405b': {
-    id: 'meta/llama-3.1-405b',
-    name: 'Llama 3.1 405B',
-    provider: 'Meta',
-    maxTokens: 131072,
+    maxTokens: 1000000,
     costPer1kTokens: 0.002,
-    description: 'Open source powerhouse',
+    description: '⚡ Lightning-fast responses without compromising quality',
   },
-  'openai/gpt-4': {
-    id: 'openai/gpt-4',
-    name: 'GPT-4',
-    provider: 'OpenAI',
-    maxTokens: 8192,
-    costPer1kTokens: 0.06,
-    description: 'Reliable and capable',
-  },
-  'anthropic/claude-3-haiku': {
-    id: 'anthropic/claude-3-haiku',
-    name: 'Claude 3 Haiku',
+  'anthropic/claude-sonnet-4': {
+    id: 'anthropic/claude-sonnet-4',
+    name: 'Claude Sonnet 4',
     provider: 'Anthropic',
     maxTokens: 200000,
-    costPer1kTokens: 0.00025,
-    description: 'Fast and efficient',
+    costPer1kTokens: 0.003,
+    description: '📚 Exceptional context handling for extensive prompts',
   },
 };
 
@@ -292,14 +284,14 @@ export const USER_TIERS: Record<string, UserTier> = {
     name: 'Free',
     maxRequestsPerMonth: 50,
     maxTokensPerRequest: 4000,
-    availableModels: ['anthropic/claude-3-haiku', 'meta/llama-3.1-405b'],
+    availableModels: ['deepseek-r1', 'gemini-2.5-flash'],
     features: ['Basic enhancement', 'History (7 days)', 'Export'],
   },
   pro: {
     name: 'Pro',
     maxRequestsPerMonth: 1000,
     maxTokensPerRequest: 16000,
-    availableModels: ['openai/gpt-4', 'anthropic/claude-3.5-sonnet', 'google/gemini-1.5-pro'],
+    availableModels: ['deepseek-r1', 'gemini-2.5-flash', 'gemini-2.5-pro', 'claude-sonnet-4-0'],
     features: ['All techniques', 'History (30 days)', 'Export', 'Templates', 'Priority support'],
   },
   enterprise: {

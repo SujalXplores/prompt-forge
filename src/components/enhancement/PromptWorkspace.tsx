@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import {
-  MagicWandIcon,
-  ClipboardIcon,
-  PlayIcon,
-  StopIcon,
-  InfoCircledIcon,
-} from '@radix-ui/react-icons';
+  RiSparklingLine,
+  RiClipboardLine,
+  RiPlayLine,
+  RiStopLine,
+  RiInformationLine,
+} from '@remixicon/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +30,7 @@ import { AI_MODELS, ENHANCEMENT_TECHNIQUES, OUTPUT_FORMATS } from '@/lib/ai-conf
 
 export function PromptWorkspace() {
   const [inputPrompt, setInputPrompt] = useState('');
-  const [selectedModel, setSelectedModel] = useState('deepseek/r1-0528');
+  const [selectedModel, setSelectedModel] = useState('deepseek/deepseek-chat-v3-0324');
   const [selectedTechnique, setSelectedTechnique] = useState('chain-of-thought');
   const [selectedFormat, setSelectedFormat] = useState('text');
 
@@ -179,7 +179,7 @@ export function PromptWorkspace() {
           <CardHeader>
             <CardTitle className='flex items-center justify-between'>
               <div className='flex items-center gap-2'>
-                <MagicWandIcon className='w-5 h-5' />
+                <RiSparklingLine className='w-5 h-5' />
                 <span>Original Prompt</span>
               </div>
               <div className='text-sm text-muted-foreground font-normal'>
@@ -204,7 +204,7 @@ export function PromptWorkspace() {
                       onClick={() => handleCopy(inputPrompt)}
                       disabled={!inputPrompt.trim()}
                     >
-                      <ClipboardIcon className='w-4 h-4 mr-2' />
+                      <RiClipboardLine className='w-4 h-4 mr-2' />
                       Copy
                     </Button>
                   </div>
@@ -216,12 +216,12 @@ export function PromptWorkspace() {
                   >
                     {isEnhancing ? (
                       <>
-                        <StopIcon className='w-4 h-4 mr-2' />
+                        <RiStopLine className='w-4 h-4 mr-2' />
                         Stop
                       </>
                     ) : (
                       <>
-                        <PlayIcon className='w-4 h-4 mr-2' />
+                        <RiPlayLine className='w-4 h-4 mr-2' />
                         Enhance Prompt
                       </>
                     )}
@@ -237,7 +237,7 @@ export function PromptWorkspace() {
             <CardTitle className='flex items-center justify-between'>
               <div className='flex items-center gap-2'>
                 <div className='w-5 h-5 bg-primary rounded-md flex items-center justify-center'>
-                  <MagicWandIcon className='w-3 h-3 text-primary-foreground' />
+                  <RiSparklingLine className='w-3 h-3 text-primary-foreground' />
                 </div>
                 <span>Enhanced Prompt</span>
               </div>
@@ -253,7 +253,7 @@ export function PromptWorkspace() {
               {error ? (
                 <div className='flex items-center justify-center h-full text-destructive'>
                   <div className='text-center space-y-2'>
-                    <InfoCircledIcon className='w-12 h-12 mx-auto opacity-50' />
+                    <RiInformationLine className='w-12 h-12 mx-auto opacity-50' />
                     <p className='text-sm'>Enhancement failed</p>
                     <p className='text-xs text-muted-foreground'>{error}</p>
                   </div>
@@ -275,7 +275,7 @@ export function PromptWorkspace() {
               ) : (
                 <div className='flex items-center justify-center h-full text-muted-foreground'>
                   <div className='text-center space-y-2'>
-                    <MagicWandIcon className='w-12 h-12 mx-auto opacity-50' />
+                    <RiSparklingLine className='w-12 h-12 mx-auto opacity-50' />
                     <p className='text-base'>Enhanced prompt will appear here</p>
                     <p className='text-sm'>Configure settings above and click "Enhance Prompt"</p>
                   </div>
@@ -290,7 +290,7 @@ export function PromptWorkspace() {
                   onClick={() => handleCopy(enhancedContent)}
                   disabled={!enhancedContent}
                 >
-                  <ClipboardIcon className='w-4 h-4 mr-2' />
+                  <RiClipboardLine className='w-4 h-4 mr-2' />
                   Copy Enhanced Prompt
                 </Button>
               </div>
