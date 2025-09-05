@@ -100,7 +100,10 @@ export const PromptOutputSection = memo(
             </ScrollArea>
 
             <div className='flex items-center justify-between pt-2 border-t'>
-              <Badge variant='outline' className='text-green-600 border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-800 dark:text-green-400'>
+              <Badge
+                variant='outline'
+                className='text-green-600 border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-800 dark:text-green-400'
+              >
                 <RiCheckDoubleLine className='w-3 h-3 mr-1' />
                 Enhanced
               </Badge>
