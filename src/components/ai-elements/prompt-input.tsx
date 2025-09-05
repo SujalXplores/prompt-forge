@@ -19,21 +19,32 @@ import {
   type KeyboardEventHandler,
 } from 'react';
 
-export type PromptInputProps = HTMLAttributes<HTMLFormElement>;
+export type PromptInputProps = HTMLAttributes<HTMLFormElement> & {
+  onSubmit?: () => void;
+};
 
-export const PromptInput = ({ className, ...props }: PromptInputProps) => (
-  <form
-    className={cn(
-      'w-full divide-y overflow-hidden rounded-xl border bg-background shadow-sm',
-      className
-    )}
-    {...props}
-  />
-);
+export const PromptInput = ({ className, onSubmit, ...props }: PromptInputProps) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit?.();
+  };
+
+  return (
+    <form
+      className={cn(
+        'w-full divide-y overflow-hidden rounded-xl border bg-background shadow-sm',
+        className
+      )}
+      onSubmit={handleSubmit}
+      {...props}
+    />
+  );
+};
 
 export type PromptInputTextareaProps = ComponentProps<typeof Textarea> & {
   minHeight?: number;
   maxHeight?: number;
+  onSubmit?: () => void;
 };
 
 export const PromptInputTextarea = ({
@@ -42,6 +53,7 @@ export const PromptInputTextarea = ({
   placeholder = 'What would you like to know?',
   minHeight: _minHeight = 48,
   maxHeight: _maxHeight = 164,
+  onSubmit,
   ...props
 }: PromptInputTextareaProps) => {
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = e => {
@@ -56,12 +68,9 @@ export const PromptInputTextarea = ({
         return;
       }
 
-      // Submit on Enter (without Shift)
+      // Prevent form submission and call custom onSubmit instead
       e.preventDefault();
-      const form = e.currentTarget.form;
-      if (form) {
-        form.requestSubmit();
-      }
+      onSubmit?.();
     }
   };
 
@@ -74,6 +83,11 @@ export const PromptInputTextarea = ({
         className
       )}
       name='message'
+      autoFocus
+      spellCheck
+      autoComplete='off'
+      autoCorrect='on'
+      autoCapitalize='sentences'
       onChange={e => {
         onChange?.(e);
       }}
