@@ -77,7 +77,7 @@ export const ENHANCEMENT_TECHNIQUES: Record<string, EnhancementTechnique> = {
   'chain-of-thought': {
     id: 'chain-of-thought',
     name: 'Chain of Thought',
-    description: 'A linear reasoning method that breaks down complex tasks into a series of manageable subproblems.',
+    description: 'Step-by-step reasoning for complex problems',
     icon: 'RiBrainLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Chain of Thought reasoning.
 
@@ -93,7 +93,7 @@ Transform the prompt to encourage this structured, step-by-step thinking.`,
   'few-shot': {
     id: 'few-shot',
     name: 'Few-Shot Learning',
-    description: 'A highly effective technique that provides a model with a small number of high-quality examples to guide its behavior.',
+    description: 'Learn from examples to guide responses',
     icon: 'RiLightbulbFill',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Few-Shot learning techniques.
 
@@ -108,7 +108,7 @@ Transform the prompt to include relevant examples that guide the AI's response.`
   'zero-shot': {
     id: 'zero-shot',
     name: 'Zero-Shot',
-    description: 'The simplest and most cost-effective prompting method, relying solely on the models pre-trained knowledge to generate a response.',
+    description: 'Direct instructions without examples',
     icon: 'RiMagicFill',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Zero-Shot techniques.
 
@@ -123,7 +123,7 @@ Transform the prompt to be self-contained and crystal clear.`,
   'role-based': {
     id: 'role-based',
     name: 'Role-Based',
-    description: 'A powerful technique for "priming" a model to adopt a specific expert identity, tone, and perspective.',
+    description: 'AI adopts expert persona and perspective',
     icon: 'RiUserLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Role-Based prompting.
 
@@ -138,7 +138,7 @@ Transform the prompt to leverage expert knowledge and professional perspective.`
   'meta-prompting': {
     id: 'meta-prompting',
     name: 'Meta-Prompting',
-    description: 'A structural technique that guides a model to generate and refine its own prompts, creating a self-improving, adaptive loop.',
+    description: 'AI generates and refines its own prompts',
     icon: 'RiRecycleLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Meta-Prompting techniques.
 
@@ -153,7 +153,7 @@ Transform the prompt to be self-improving and adaptive.`,
   'tree-of-thought': {
     id: 'tree-of-thought',
     name: 'Tree of Thought',
-    description: 'A branching, non-linear reasoning approach that allows a model to explore multiple solution paths simultaneously.',
+    description: 'Explore multiple solution paths simultaneously',
     icon: 'RiNodeTree',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Tree of Thought reasoning.
 
@@ -169,7 +169,7 @@ Transform the prompt to explore multiple reasoning paths before concluding.`,
   'self-consistency': {
     id: 'self-consistency',
     name: 'Self-Consistency',
-    description: 'A strategy that generates multiple independent reasoning paths and then selects the most consistent answer.',
+    description: 'Generate multiple solutions, pick consensus',
     icon: 'RiCheckDoubleLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Self-Consistency techniques.
 
@@ -185,7 +185,7 @@ Transform the prompt to generate and compare multiple solutions.`,
   'structured-output': {
     id: 'structured-output',
     name: 'Structured Output',
-    description: 'A method to enforce specific output formats and schemas for reliable data exchange.',
+    description: 'Enforce specific output formats and schemas',
     icon: 'RiCodeBoxLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt to ensure structured, formatted output.
 
