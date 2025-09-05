@@ -74,3 +74,61 @@
     font-family: 'Geist', system-ui, sans-serif;
   }
 }
+
+@layer components {
+  /* Streaming cursor animation */
+  .streaming-cursor {
+    @apply inline-block;
+    animation: cursor-blink 1s ease-in-out infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0.3;
+    }
+  }
+
+  /* Better prose spacing for streaming content */
+  .prose.streaming-prose {
+    @apply leading-7;
+  }
+
+  .prose.streaming-prose p {
+    @apply mb-4 last:mb-0;
+  }
+
+  .prose.streaming-prose h1,
+  .prose.streaming-prose h2,
+  .prose.streaming-prose h3,
+  .prose.streaming-prose h4 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  .prose.streaming-prose ul,
+  .prose.streaming-prose ol {
+    @apply my-4 space-y-2;
+  }
+
+  .prose.streaming-prose li {
+    @apply leading-relaxed;
+  }
+
+  .prose.streaming-prose blockquote {
+    @apply my-4 border-l-4 border-border pl-4 italic;
+  }
+
+  .prose.streaming-prose code {
+    @apply px-1.5 py-0.5 rounded bg-muted text-muted-foreground;
+  }
+
+  .prose.streaming-prose pre {
+    @apply my-4 p-4 rounded-lg bg-muted overflow-x-auto;
+  }
+
+  .prose.streaming-prose pre code {
+    @apply p-0 bg-transparent;
+  }
+}
