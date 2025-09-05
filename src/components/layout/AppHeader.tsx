@@ -1,5 +1,5 @@
 import { UserButton, SignedIn, SignedOut, SignInButton } from '@clerk/clerk-react';
-import { RiMagicFill, RiMoonLine, RiSunLine } from '@remixicon/react';
+import { MagicWandIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { Button } from '@/components/ui/button';
 import { Actions, Action } from '@/components/ai-elements';
 import { useTheme } from 'next-themes';
@@ -13,7 +13,7 @@ export function AppHeader() {
         {/* Logo and branding */}
         <div className='flex items-center gap-3'>
           <div className='flex items-center justify-center w-10 h-10 bg-primary rounded-md shadow'>
-            <RiMagicFill className='w-6 h-6 text-primary-foreground' />
+            <MagicWandIcon className='w-6 h-6 text-primary-foreground' />
           </div>
           <div className='flex flex-col'>
             <h1 className='text-xl font-bold text-foreground'>PromptForge</h1>
@@ -30,8 +30,8 @@ export function AppHeader() {
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className='w-9 h-9'
             >
-              <RiSunLine className='h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-              <RiMoonLine className='absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+              <SunIcon className='h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+              <MoonIcon className='absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
               <span className='sr-only'>Toggle theme</span>
             </Action>
           </Actions>

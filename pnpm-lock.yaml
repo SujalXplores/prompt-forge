@@ -71,9 +71,6 @@ importers:
       '@radix-ui/react-use-controllable-state':
         specifier: 1.2.2
         version: 1.2.2(@types/react@19.1.12)(react@19.1.1)
-      '@remixicon/react':
-        specifier: 4.6.0
-        version: 4.6.0(react@19.1.1)
       '@tanstack/react-query':
         specifier: 5.86.0
         version: 5.86.0(react@19.1.1)
@@ -1284,11 +1281,6 @@ packages:
 
   '@radix-ui/rect@1.1.1':
     resolution: {integrity: sha512-HPwpGIzkl28mWyZqG52jiqDJ12waP11Pa1lGoiyUkIEuMLBP0oeK/C89esbXrxsky5we7dfd8U58nm0SgAWpVw==}
-
-  '@remixicon/react@4.6.0':
-    resolution: {integrity: sha512-bY56maEgT5IYUSRotqy9h03IAKJC85vlKtWFg2FKzfs8JPrkdBAYSa9dxoUSKFwGzup8Ux6vjShs9Aec3jvr2w==}
-    peerDependencies:
-      react: '>=18.2.0'
 
   '@rolldown/pluginutils@1.0.0-beta.32':
     resolution: {integrity: sha512-QReCdvxiUZAPkvp1xpAg62IeNzykOFA6syH2CnClif4YmALN1XKpB39XneL80008UbtMShthSVDKmrx05N1q/g==}
@@ -6035,10 +6027,6 @@ snapshots:
       '@types/react-dom': 19.1.9(@types/react@19.1.12)
 
   '@radix-ui/rect@1.1.1': {}
-
-  '@remixicon/react@4.6.0(react@19.1.1)':
-    dependencies:
-      react: 19.1.1
 
   '@rolldown/pluginutils@1.0.0-beta.32': {}
 

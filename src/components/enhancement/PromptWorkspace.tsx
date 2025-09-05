@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import {
-  RiMagicFill,
-  RiClipboardLine,
-  RiPlayFill,
-  RiStopFill,
-  RiInformationLine,
-} from '@remixicon/react';
+  MagicWandIcon,
+  ClipboardIcon,
+  PlayIcon,
+  StopIcon,
+  InfoCircledIcon,
+} from '@radix-ui/react-icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +30,7 @@ import { AI_MODELS, ENHANCEMENT_TECHNIQUES, OUTPUT_FORMATS } from '@/lib/ai-conf
 
 export function PromptWorkspace() {
   const [inputPrompt, setInputPrompt] = useState('');
-  const [selectedModel, setSelectedModel] = useState('openai/gpt-4o');
+  const [selectedModel, setSelectedModel] = useState('deepseek/r1-0528');
   const [selectedTechnique, setSelectedTechnique] = useState('chain-of-thought');
   const [selectedFormat, setSelectedFormat] = useState('text');
 
@@ -88,8 +88,9 @@ export function PromptWorkspace() {
         <div className='text-center space-y-4'>
           <h1 className='text-3xl font-bold text-foreground'>Enhance Your Prompts with AI</h1>
           <p className='text-lg text-muted-foreground max-w-2xl mx-auto'>
-            Transform your prompts using advanced AI techniques. Choose your model, technique, and
-            see instant improvements.
+            Transform your prompts using specialized AI models. Choose from category winners: free
+            excellence, cost-effective premium, ultimate reasoning, fastest response, and best
+            context handling.
           </p>
         </div>
 
@@ -102,16 +103,29 @@ export function PromptWorkspace() {
                 <label className='text-sm font-medium'>AI Model</label>
                 <Select value={selectedModel} onValueChange={setSelectedModel}>
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue>{AI_MODELS[selectedModel]?.name}</SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(AI_MODELS).map(model => (
                       <SelectItem key={model.id} value={model.id}>
-                        <div className='flex items-center gap-2'>
-                          <span className='font-medium'>{model.name}</span>
-                          <Badge variant='secondary' className='text-xs'>
-                            {model.provider}
-                          </Badge>
+                        <div className='flex flex-col gap-1 py-1'>
+                          <div className='flex items-center gap-2'>
+                            <span className='font-medium'>{model.name}</span>
+                            <Badge variant='secondary' className='text-xs'>
+                              {model.provider}
+                            </Badge>
+                            {model.costPer1kTokens === 0 && (
+                              <Badge
+                                variant='outline'
+                                className='text-xs text-green-600 border-green-200'
+                              >
+                                FREE
+                              </Badge>
+                            )}
+                          </div>
+                          <span className='text-xs text-muted-foreground leading-relaxed'>
+                            {model.description}
+                          </span>
                         </div>
                       </SelectItem>
                     ))}
@@ -161,12 +175,11 @@ export function PromptWorkspace() {
           </CardContent>
         </Card>
 
-        {/* Input Section */}
         <Card>
           <CardHeader>
             <CardTitle className='flex items-center justify-between'>
               <div className='flex items-center gap-2'>
-                <RiMagicFill className='w-5 h-5' />
+                <MagicWandIcon className='w-5 h-5' />
                 <span>Original Prompt</span>
               </div>
               <div className='text-sm text-muted-foreground font-normal'>
@@ -191,7 +204,7 @@ export function PromptWorkspace() {
                       onClick={() => handleCopy(inputPrompt)}
                       disabled={!inputPrompt.trim()}
                     >
-                      <RiClipboardLine className='w-4 h-4 mr-2' />
+                      <ClipboardIcon className='w-4 h-4 mr-2' />
                       Copy
                     </Button>
                   </div>
@@ -203,12 +216,12 @@ export function PromptWorkspace() {
                   >
                     {isEnhancing ? (
                       <>
-                        <RiStopFill className='w-4 h-4 mr-2' />
+                        <StopIcon className='w-4 h-4 mr-2' />
                         Stop
                       </>
                     ) : (
                       <>
-                        <RiPlayFill className='w-4 h-4 mr-2' />
+                        <PlayIcon className='w-4 h-4 mr-2' />
                         Enhance Prompt
                       </>
                     )}
@@ -219,13 +232,12 @@ export function PromptWorkspace() {
           </CardContent>
         </Card>
 
-        {/* Output Section */}
         <Card>
           <CardHeader>
             <CardTitle className='flex items-center justify-between'>
               <div className='flex items-center gap-2'>
                 <div className='w-5 h-5 bg-primary rounded-md flex items-center justify-center'>
-                  <RiMagicFill className='w-3 h-3 text-primary-foreground' />
+                  <MagicWandIcon className='w-3 h-3 text-primary-foreground' />
                 </div>
                 <span>Enhanced Prompt</span>
               </div>
@@ -241,7 +253,7 @@ export function PromptWorkspace() {
               {error ? (
                 <div className='flex items-center justify-center h-full text-destructive'>
                   <div className='text-center space-y-2'>
-                    <RiInformationLine className='w-12 h-12 mx-auto opacity-50' />
+                    <InfoCircledIcon className='w-12 h-12 mx-auto opacity-50' />
                     <p className='text-sm'>Enhancement failed</p>
                     <p className='text-xs text-muted-foreground'>{error}</p>
                   </div>
@@ -263,7 +275,7 @@ export function PromptWorkspace() {
               ) : (
                 <div className='flex items-center justify-center h-full text-muted-foreground'>
                   <div className='text-center space-y-2'>
-                    <RiMagicFill className='w-12 h-12 mx-auto opacity-50' />
+                    <MagicWandIcon className='w-12 h-12 mx-auto opacity-50' />
                     <p className='text-base'>Enhanced prompt will appear here</p>
                     <p className='text-sm'>Configure settings above and click "Enhance Prompt"</p>
                   </div>
@@ -278,7 +290,7 @@ export function PromptWorkspace() {
                   onClick={() => handleCopy(enhancedContent)}
                   disabled={!enhancedContent}
                 >
-                  <RiClipboardLine className='w-4 h-4 mr-2' />
+                  <ClipboardIcon className='w-4 h-4 mr-2' />
                   Copy Enhanced Prompt
                 </Button>
               </div>
