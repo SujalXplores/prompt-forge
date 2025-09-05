@@ -6,8 +6,6 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: '::',
     port: 8080,
-    // Only proxy in production or when API server is explicitly running
-    // For development, we'll use the mock API directly
   },
   plugins: [react()],
   resolve: {

@@ -10,7 +10,6 @@ import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
 
-// Import your publishable key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
@@ -27,7 +26,6 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<Index />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path='*' element={<NotFound />} />
             </Routes>
           </BrowserRouter>

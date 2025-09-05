@@ -17,7 +17,6 @@ import {
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-// AI Elements
 import {
   PromptInput,
   PromptInputTextarea,
@@ -43,9 +42,9 @@ export function PromptWorkspace() {
       return;
     }
 
-    const model = AI_MODELS.find(m => m.id === selectedModel);
-    const technique = ENHANCEMENT_TECHNIQUES.find(t => t.id === selectedTechnique);
-    const outputFormat = OUTPUT_FORMATS.find(f => f.id === selectedFormat);
+    const model = AI_MODELS[selectedModel];
+    const technique = ENHANCEMENT_TECHNIQUES[selectedTechnique];
+    const outputFormat = OUTPUT_FORMATS[selectedFormat];
 
     if (!model || !technique || !outputFormat) {
       toast.error('Please select valid model, technique, and output format');
@@ -106,7 +105,7 @@ export function PromptWorkspace() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {AI_MODELS.map(model => (
+                    {Object.values(AI_MODELS).map(model => (
                       <SelectItem key={model.id} value={model.id}>
                         <div className='flex items-center gap-2'>
                           <span className='font-medium'>{model.name}</span>
@@ -125,10 +124,10 @@ export function PromptWorkspace() {
                 <label className='text-sm font-medium'>Enhancement Technique</label>
                 <Select value={selectedTechnique} onValueChange={setSelectedTechnique}>
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue>{ENHANCEMENT_TECHNIQUES[selectedTechnique]?.name}</SelectValue>
                   </SelectTrigger>
                   <SelectContent>
-                    {ENHANCEMENT_TECHNIQUES.map(technique => (
+                    {Object.values(ENHANCEMENT_TECHNIQUES).map(technique => (
                       <SelectItem key={technique.id} value={technique.id}>
                         <div className='flex flex-col'>
                           <span className='font-medium'>{technique.name}</span>
@@ -150,7 +149,7 @@ export function PromptWorkspace() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {OUTPUT_FORMATS.map(format => (
+                    {Object.values(OUTPUT_FORMATS).map(format => (
                       <SelectItem key={format.id} value={format.id}>
                         {format.name}
                       </SelectItem>
@@ -200,6 +199,7 @@ export function PromptWorkspace() {
                     onClick={isEnhancing ? cancel : handleEnhance}
                     disabled={!inputPrompt.trim()}
                     variant={isEnhancing ? 'destructive' : 'default'}
+                    size='default'
                   >
                     {isEnhancing ? (
                       <>

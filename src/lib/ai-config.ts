@@ -50,8 +50,8 @@ export interface UserTier {
   features: string[];
 }
 
-export const AI_MODELS: ModelConfig[] = [
-  {
+export const AI_MODELS: Record<string, ModelConfig> = {
+  'openai/gpt-4o': {
     id: 'openai/gpt-4o',
     name: 'GPT-4o',
     provider: 'OpenAI',
@@ -59,7 +59,7 @@ export const AI_MODELS: ModelConfig[] = [
     costPer1kTokens: 0.03,
     description: 'Latest GPT-4 with improved reasoning',
   },
-  {
+  'anthropic/claude-3.5-sonnet': {
     id: 'anthropic/claude-3.5-sonnet',
     name: 'Claude 3.5 Sonnet',
     provider: 'Anthropic',
@@ -67,7 +67,7 @@ export const AI_MODELS: ModelConfig[] = [
     costPer1kTokens: 0.015,
     description: 'Advanced reasoning and analysis',
   },
-  {
+  'google/gemini-1.5-pro': {
     id: 'google/gemini-1.5-pro',
     name: 'Gemini 1.5 Pro',
     provider: 'Google',
@@ -75,7 +75,7 @@ export const AI_MODELS: ModelConfig[] = [
     costPer1kTokens: 0.0035,
     description: 'Massive context window',
   },
-  {
+  'meta/llama-3.1-405b': {
     id: 'meta/llama-3.1-405b',
     name: 'Llama 3.1 405B',
     provider: 'Meta',
@@ -83,7 +83,7 @@ export const AI_MODELS: ModelConfig[] = [
     costPer1kTokens: 0.002,
     description: 'Open source powerhouse',
   },
-  {
+  'openai/gpt-4': {
     id: 'openai/gpt-4',
     name: 'GPT-4',
     provider: 'OpenAI',
@@ -91,7 +91,7 @@ export const AI_MODELS: ModelConfig[] = [
     costPer1kTokens: 0.06,
     description: 'Reliable and capable',
   },
-  {
+  'anthropic/claude-3-haiku': {
     id: 'anthropic/claude-3-haiku',
     name: 'Claude 3 Haiku',
     provider: 'Anthropic',
@@ -99,10 +99,10 @@ export const AI_MODELS: ModelConfig[] = [
     costPer1kTokens: 0.00025,
     description: 'Fast and efficient',
   },
-];
+};
 
-export const ENHANCEMENT_TECHNIQUES: EnhancementTechnique[] = [
-  {
+export const ENHANCEMENT_TECHNIQUES: Record<string, EnhancementTechnique> = {
+  'chain-of-thought': {
     id: 'chain-of-thought',
     name: 'Chain of Thought',
     description: 'Step-by-step reasoning and analysis',
@@ -118,7 +118,7 @@ Guidelines:
 
 Transform the prompt to encourage step-by-step thinking while maintaining the original intent.`,
   },
-  {
+  'few-shot': {
     id: 'few-shot',
     name: 'Few-Shot Learning',
     description: 'Learning through examples and demonstrations',
@@ -134,7 +134,7 @@ Guidelines:
 
 Transform the prompt to include relevant examples that guide the AI's response.`,
   },
-  {
+  'zero-shot': {
     id: 'zero-shot',
     name: 'Zero-Shot',
     description: 'Direct instruction without examples',
@@ -150,7 +150,7 @@ Guidelines:
 
 Transform the prompt to be self-contained and crystal clear without needing examples.`,
   },
-  {
+  'role-based': {
     id: 'role-based',
     name: 'Role-Based',
     description: 'Assign specific expert roles and personas',
@@ -166,7 +166,7 @@ Guidelines:
 
 Transform the prompt to leverage expert knowledge and professional perspective.`,
   },
-  {
+  'meta-prompting': {
     id: 'meta-prompting',
     name: 'Meta-Prompting',
     description: 'Self-reflective and adaptive prompting',
@@ -182,7 +182,7 @@ Guidelines:
 
 Transform the prompt to be self-improving and adaptive.`,
   },
-  {
+  'tree-of-thought': {
     id: 'tree-of-thought',
     name: 'Tree of Thought',
     description: 'Explore multiple reasoning paths',
@@ -198,7 +198,7 @@ Guidelines:
 
 Transform the prompt to explore multiple reasoning paths before concluding.`,
   },
-  {
+  'self-consistency': {
     id: 'self-consistency',
     name: 'Self-Consistency',
     description: 'Multiple reasoning paths with consensus',
@@ -214,7 +214,7 @@ Guidelines:
 
 Transform the prompt to generate and compare multiple solutions.`,
   },
-  {
+  'structured-output': {
     id: 'structured-output',
     name: 'Structured Output',
     description: 'Enforce specific output formats and schemas',
@@ -230,16 +230,16 @@ Guidelines:
 
 Transform the prompt to produce consistent, structured responses.`,
   },
-];
+};
 
-export const OUTPUT_FORMATS: OutputFormat[] = [
-  {
+export const OUTPUT_FORMATS: Record<string, OutputFormat> = {
+  text: {
     id: 'text',
     name: 'Plain Text',
     description: 'Natural language response',
     template: 'Provide your response in clear, well-structured plain text.',
   },
-  {
+  markdown: {
     id: 'markdown',
     name: 'Markdown',
     description: 'Formatted markdown with headers and lists',
@@ -250,7 +250,7 @@ export const OUTPUT_FORMATS: OutputFormat[] = [
 - Code blocks where appropriate
 - Tables if needed`,
   },
-  {
+  json: {
     id: 'json',
     name: 'JSON',
     description: 'Structured JSON object',
@@ -266,7 +266,7 @@ export const OUTPUT_FORMATS: OutputFormat[] = [
   }
 }`,
   },
-  {
+  xml: {
     id: 'xml',
     name: 'XML',
     description: 'Structured XML format',
@@ -285,7 +285,7 @@ export const OUTPUT_FORMATS: OutputFormat[] = [
   </metadata>
 </response>`,
   },
-];
+};
 
 export const USER_TIERS: Record<string, UserTier> = {
   free: {
@@ -306,7 +306,7 @@ export const USER_TIERS: Record<string, UserTier> = {
     name: 'Enterprise',
     maxRequestsPerMonth: -1, // Unlimited
     maxTokensPerRequest: 128000,
-    availableModels: AI_MODELS.map(m => m.id),
+    availableModels: Object.keys(AI_MODELS),
     features: ['Unlimited', 'All models', 'Custom techniques', 'API access', 'Team collaboration'],
   },
 };

@@ -1,18 +1,8 @@
 import { useState, useCallback, useRef } from 'react';
 import { useUser } from '@clerk/clerk-react';
-import { openrouter } from '../lib/openrouter';
 import { streamText } from 'ai';
 import type { ModelConfig, EnhancementTechnique, OutputFormat } from '../lib/ai-config';
-
-// Create a configured OpenRouter provider
-const _createOpenRouterModel = (modelId: string) => {
-  // Set the API key globally for OpenRouter
-  if (typeof window !== 'undefined' && import.meta.env.VITE_OPENROUTER_API_KEY) {
-    // For client-side, we need to use a different approach
-    return openrouter(modelId);
-  }
-  return openrouter(modelId);
-};
+import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 
 export interface EnhancementRequest {
   content: string;
@@ -31,6 +21,10 @@ export interface EnhancementResult {
   timestamp: Date;
   tokensUsed?: number;
 }
+
+const openrouter = createOpenRouter({
+  apiKey: import.meta.env.VITE_OPENROUTER_API_KEY,
+});
 
 export function useAIEnhancement() {
   const { user } = useUser();
@@ -65,16 +59,9 @@ export function useAIEnhancement() {
 
         enhancedPrompt += 'Please provide the enhanced version following all guidelines above.';
 
-        // Validate API key
-        const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-        if (!apiKey) {
-          throw new Error(
-            'OpenRouter API key not configured. Please add VITE_OPENROUTER_API_KEY to your environment variables.'
-          );
-        }
 
-        // Create the AI stream directly (API key is set globally in openrouter.ts)
-        const result = await streamText({
+        // Create the AI stream with OpenRouter provider
+        const result = streamText({
           model: openrouter(request.model.id),
           prompt: enhancedPrompt,
           temperature: 0.7,
@@ -84,8 +71,8 @@ export function useAIEnhancement() {
         let fullResponse = '';
 
         // Stream the response
-        for await (const textPart of result.textStream) {
-          fullResponse += textPart;
+        for await (const chunk of result.textStream) {
+          fullResponse += chunk;
           setEnhancedContent(fullResponse);
         }
 
