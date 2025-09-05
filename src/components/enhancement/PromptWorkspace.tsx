@@ -27,21 +27,15 @@ import {
   Loader,
 } from '@/components/ai-elements';
 import { useAIEnhancement } from '@/hooks/use-ai-enhancement';
-import {
-  AI_MODELS,
-  ENHANCEMENT_TECHNIQUES,
-  OUTPUT_FORMATS,
-} from '@/lib/ai-config';
+import { AI_MODELS, ENHANCEMENT_TECHNIQUES, OUTPUT_FORMATS } from '@/lib/ai-config';
 
 export function PromptWorkspace() {
   const [inputPrompt, setInputPrompt] = useState('');
   const [selectedModel, setSelectedModel] = useState('openai/gpt-4o');
-  const [selectedTechnique, setSelectedTechnique] =
-    useState('chain-of-thought');
+  const [selectedTechnique, setSelectedTechnique] = useState('chain-of-thought');
   const [selectedFormat, setSelectedFormat] = useState('text');
 
-  const { enhance, cancel, isEnhancing, enhancedContent, error } =
-    useAIEnhancement();
+  const { enhance, cancel, isEnhancing, enhancedContent, error } = useAIEnhancement();
 
   const handleEnhance = async () => {
     if (!inputPrompt.trim()) {
@@ -49,11 +43,9 @@ export function PromptWorkspace() {
       return;
     }
 
-    const model = AI_MODELS.find((m) => m.id === selectedModel);
-    const technique = ENHANCEMENT_TECHNIQUES.find(
-      (t) => t.id === selectedTechnique
-    );
-    const outputFormat = OUTPUT_FORMATS.find((f) => f.id === selectedFormat);
+    const model = AI_MODELS.find(m => m.id === selectedModel);
+    const technique = ENHANCEMENT_TECHNIQUES.find(t => t.id === selectedTechnique);
+    const outputFormat = OUTPUT_FORMATS.find(f => f.id === selectedFormat);
 
     if (!model || !technique || !outputFormat) {
       toast.error('Please select valid model, technique, and output format');
@@ -73,9 +65,7 @@ export function PromptWorkspace() {
       }
     } catch (error) {
       toast.error(
-        `Enhancement failed: ${
-          error instanceof Error ? error.message : 'Unknown error'
-        }`
+        `Enhancement failed: ${error instanceof Error ? error.message : 'Unknown error'}`
       );
     }
   };
@@ -93,36 +83,34 @@ export function PromptWorkspace() {
   const getTokenCount = (text: string) => Math.ceil(text.length / 4); // Rough estimate
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+      <div className='max-w-4xl mx-auto space-y-8'>
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            Enhance Your Prompts with AI
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Transform your prompts using advanced AI techniques. Choose your
-            model, technique, and see instant improvements.
+        <div className='text-center space-y-4'>
+          <h1 className='text-3xl font-bold text-foreground'>Enhance Your Prompts with AI</h1>
+          <p className='text-lg text-muted-foreground max-w-2xl mx-auto'>
+            Transform your prompts using advanced AI techniques. Choose your model, technique, and
+            see instant improvements.
           </p>
         </div>
 
         {/* Configuration */}
         <Card>
-          <CardContent className="pt-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <CardContent className='pt-6'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
               {/* Model Selection */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">AI Model</label>
+              <div className='space-y-2'>
+                <label className='text-sm font-medium'>AI Model</label>
                 <Select value={selectedModel} onValueChange={setSelectedModel}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {AI_MODELS.map((model) => (
+                    {AI_MODELS.map(model => (
                       <SelectItem key={model.id} value={model.id}>
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium">{model.name}</span>
-                          <Badge variant="secondary" className="text-xs">
+                        <div className='flex items-center gap-2'>
+                          <span className='font-medium'>{model.name}</span>
+                          <Badge variant='secondary' className='text-xs'>
                             {model.provider}
                           </Badge>
                         </div>
@@ -133,23 +121,18 @@ export function PromptWorkspace() {
               </div>
 
               {/* Technique Selection */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">
-                  Enhancement Technique
-                </label>
-                <Select
-                  value={selectedTechnique}
-                  onValueChange={setSelectedTechnique}
-                >
+              <div className='space-y-2'>
+                <label className='text-sm font-medium'>Enhancement Technique</label>
+                <Select value={selectedTechnique} onValueChange={setSelectedTechnique}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {ENHANCEMENT_TECHNIQUES.map((technique) => (
+                    {ENHANCEMENT_TECHNIQUES.map(technique => (
                       <SelectItem key={technique.id} value={technique.id}>
-                        <div className="flex flex-col">
-                          <span className="font-medium">{technique.name}</span>
-                          <span className="text-xs text-muted-foreground">
+                        <div className='flex flex-col'>
+                          <span className='font-medium'>{technique.name}</span>
+                          <span className='text-xs text-muted-foreground'>
                             {technique.description}
                           </span>
                         </div>
@@ -160,17 +143,14 @@ export function PromptWorkspace() {
               </div>
 
               {/* Output Format Selection */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Output Format</label>
-                <Select
-                  value={selectedFormat}
-                  onValueChange={setSelectedFormat}
-                >
+              <div className='space-y-2'>
+                <label className='text-sm font-medium'>Output Format</label>
+                <Select value={selectedFormat} onValueChange={setSelectedFormat}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {OUTPUT_FORMATS.map((format) => (
+                    {OUTPUT_FORMATS.map(format => (
                       <SelectItem key={format.id} value={format.id}>
                         {format.name}
                       </SelectItem>
@@ -185,35 +165,34 @@ export function PromptWorkspace() {
         {/* Input Section */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <RiMagicFill className="w-5 h-5" />
+            <CardTitle className='flex items-center justify-between'>
+              <div className='flex items-center gap-2'>
+                <RiMagicFill className='w-5 h-5' />
                 <span>Original Prompt</span>
               </div>
-              <div className="text-sm text-muted-foreground font-normal">
-                {getCharCount(inputPrompt)} chars • {getTokenCount(inputPrompt)}{' '}
-                tokens
+              <div className='text-sm text-muted-foreground font-normal'>
+                {getCharCount(inputPrompt)} chars • {getTokenCount(inputPrompt)} tokens
               </div>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <PromptInput>
               <PromptInputTextarea
-                placeholder="Enter your prompt here to enhance it with AI..."
+                placeholder='Enter your prompt here to enhance it with AI...'
                 value={inputPrompt}
-                onChange={(e) => setInputPrompt(e.target.value)}
-                className="min-h-[200px] text-sm resize-none"
+                onChange={e => setInputPrompt(e.target.value)}
+                className='min-h-[200px] text-sm resize-none'
               />
               <PromptInputToolbar>
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-2">
+                <div className='flex items-center justify-between w-full'>
+                  <div className='flex items-center gap-2'>
                     <Button
-                      variant="ghost"
-                      size="sm"
+                      variant='ghost'
+                      size='sm'
                       onClick={() => handleCopy(inputPrompt)}
                       disabled={!inputPrompt.trim()}
                     >
-                      <RiClipboardLine className="w-4 h-4 mr-2" />
+                      <RiClipboardLine className='w-4 h-4 mr-2' />
                       Copy
                     </Button>
                   </div>
@@ -224,12 +203,12 @@ export function PromptWorkspace() {
                   >
                     {isEnhancing ? (
                       <>
-                        <RiStopFill className="w-4 h-4 mr-2" />
+                        <RiStopFill className='w-4 h-4 mr-2' />
                         Stop
                       </>
                     ) : (
                       <>
-                        <RiPlayFill className="w-4 h-4 mr-2" />
+                        <RiPlayFill className='w-4 h-4 mr-2' />
                         Enhance Prompt
                       </>
                     )}
@@ -243,72 +222,63 @@ export function PromptWorkspace() {
         {/* Output Section */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-primary rounded-md flex items-center justify-center">
-                  <RiMagicFill className="w-3 h-3 text-primary-foreground" />
+            <CardTitle className='flex items-center justify-between'>
+              <div className='flex items-center gap-2'>
+                <div className='w-5 h-5 bg-primary rounded-md flex items-center justify-center'>
+                  <RiMagicFill className='w-3 h-3 text-primary-foreground' />
                 </div>
                 <span>Enhanced Prompt</span>
               </div>
               {enhancedContent && (
-                <div className="text-sm text-muted-foreground font-normal">
-                  {getCharCount(enhancedContent)} chars •{' '}
-                  {getTokenCount(enhancedContent)} tokens
+                <div className='text-sm text-muted-foreground font-normal'>
+                  {getCharCount(enhancedContent)} chars • {getTokenCount(enhancedContent)} tokens
                 </div>
               )}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="min-h-[200px] bg-muted/50 border rounded-lg p-4 relative">
+            <div className='min-h-[200px] bg-muted/50 border rounded-lg p-4 relative'>
               {error ? (
-                <div className="flex items-center justify-center h-full text-destructive">
-                  <div className="text-center space-y-2">
-                    <RiInformationLine className="w-12 h-12 mx-auto opacity-50" />
-                    <p className="text-sm">Enhancement failed</p>
-                    <p className="text-xs text-muted-foreground">{error}</p>
+                <div className='flex items-center justify-center h-full text-destructive'>
+                  <div className='text-center space-y-2'>
+                    <RiInformationLine className='w-12 h-12 mx-auto opacity-50' />
+                    <p className='text-sm'>Enhancement failed</p>
+                    <p className='text-xs text-muted-foreground'>{error}</p>
                   </div>
                 </div>
               ) : isEnhancing && !enhancedContent ? (
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center space-y-4">
+                <div className='flex items-center justify-center h-full'>
+                  <div className='text-center space-y-4'>
                     <Loader size={24} />
-                    <p className="text-sm text-muted-foreground">
-                      Enhancing your prompt...
-                    </p>
+                    <p className='text-sm text-muted-foreground'>Enhancing your prompt...</p>
                   </div>
                 </div>
               ) : enhancedContent ? (
-                <div className="space-y-2">
-                  <Response className="text-sm whitespace-pre-wrap">
-                    {enhancedContent}
-                  </Response>
+                <div className='space-y-2'>
+                  <Response className='text-sm whitespace-pre-wrap'>{enhancedContent}</Response>
                   {isEnhancing && (
-                    <span className="inline-block w-2 h-5 bg-primary ml-1 animate-pulse" />
+                    <span className='inline-block w-2 h-5 bg-primary ml-1 animate-pulse' />
                   )}
                 </div>
               ) : (
-                <div className="flex items-center justify-center h-full text-muted-foreground">
-                  <div className="text-center space-y-2">
-                    <RiMagicFill className="w-12 h-12 mx-auto opacity-50" />
-                    <p className="text-base">
-                      Enhanced prompt will appear here
-                    </p>
-                    <p className="text-sm">
-                      Configure settings above and click "Enhance Prompt"
-                    </p>
+                <div className='flex items-center justify-center h-full text-muted-foreground'>
+                  <div className='text-center space-y-2'>
+                    <RiMagicFill className='w-12 h-12 mx-auto opacity-50' />
+                    <p className='text-base'>Enhanced prompt will appear here</p>
+                    <p className='text-sm'>Configure settings above and click "Enhance Prompt"</p>
                   </div>
                 </div>
               )}
             </div>
 
             {enhancedContent && (
-              <div className="flex justify-end mt-4">
+              <div className='flex justify-end mt-4'>
                 <Button
-                  variant="outline"
+                  variant='outline'
                   onClick={() => handleCopy(enhancedContent)}
                   disabled={!enhancedContent}
                 >
-                  <RiClipboardLine className="w-4 h-4 mr-2" />
+                  <RiClipboardLine className='w-4 h-4 mr-2' />
                   Copy Enhanced Prompt
                 </Button>
               </div>

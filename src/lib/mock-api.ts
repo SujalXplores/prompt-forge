@@ -69,22 +69,33 @@ Please proceed with your analysis and provide a comprehensive response following
         controller.enqueue(encoder.encode(chunk));
         index += chunkSize;
       }, 50); // 50ms delay between chunks
-    }
+    },
   });
 }
 
 function getExpertRole(_prompt: string): string {
   const roles = [
-    'consultant', 'analyst', 'researcher', 'strategist', 'advisor',
-    'specialist', 'practitioner', 'professional', 'expert', 'guide'
+    'consultant',
+    'analyst',
+    'researcher',
+    'strategist',
+    'advisor',
+    'specialist',
+    'practitioner',
+    'professional',
+    'expert',
+    'guide',
   ];
   return roles[Math.floor(Math.random() * roles.length)];
 }
 
 function getDomain(_prompt: string): string {
   const domains = [
-    'this field', 'the subject matter', 'relevant methodologies',
-    'industry best practices', 'current trends and developments'
+    'this field',
+    'the subject matter',
+    'relevant methodologies',
+    'industry best practices',
+    'current trends and developments',
   ];
   return domains[Math.floor(Math.random() * domains.length)];
 }

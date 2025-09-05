@@ -1,0 +1,13 @@
+node_modules
+dist
+build
+coverage
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.log
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

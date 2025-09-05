@@ -1,6 +1,6 @@
 /**
  * PromptForge System Prompts
- * 
+ *
  * These are the core system prompts that drive the AI enhancement engine.
  * Each prompt is designed to maximize the effectiveness of specific enhancement techniques.
  */
@@ -123,5 +123,5 @@ STRUCTURED OUTPUT ENHANCEMENT:
 - Add validation rules and constraints
 - Specify required fields and optional elements
 - Include error handling for malformed outputs
-`
+`,
 };

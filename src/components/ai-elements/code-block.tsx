@@ -12,10 +12,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import {
-  oneDark,
-  oneLight,
-} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 type CodeBlockContextType = {
   code: string;
@@ -48,9 +45,9 @@ export const CodeBlock = ({
       )}
       {...props}
     >
-      <div className="relative">
+      <div className='relative'>
         <SyntaxHighlighter
-          className="overflow-hidden dark:hidden"
+          className='overflow-hidden dark:hidden'
           codeTagProps={{
             className: 'font-mono text-sm',
           }}
@@ -73,7 +70,7 @@ export const CodeBlock = ({
           {code}
         </SyntaxHighlighter>
         <SyntaxHighlighter
-          className="hidden overflow-hidden dark:block"
+          className='hidden overflow-hidden dark:block'
           codeTagProps={{
             className: 'font-mono text-sm',
           }}
@@ -96,9 +93,7 @@ export const CodeBlock = ({
           {code}
         </SyntaxHighlighter>
         {children && (
-          <div className="absolute top-2 right-2 flex items-center gap-2">
-            {children}
-          </div>
+          <div className='absolute top-2 right-2 flex items-center gap-2'>{children}</div>
         )}
       </div>
     </div>
@@ -144,8 +139,8 @@ export const CodeBlockCopyButton = ({
     <Button
       className={cn('shrink-0', className)}
       onClick={copyToClipboard}
-      size="icon"
-      variant="ghost"
+      size='icon'
+      variant='ghost'
       {...props}
     >
       {children ?? <Icon size={14} />}

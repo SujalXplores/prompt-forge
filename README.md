@@ -7,6 +7,7 @@ A premium, scalable prompt enhancement application that transforms your prompts 
 ## ✨ Features
 
 ### 🤖 AI-Powered Enhancement
+
 - **Vercel AI Elements** integration for polished chat interfaces
 - **Real-time streaming** responses using Vercel AI SDK v5
 - **Multiple AI models** via OpenRouter (GPT-4o, Claude 3.5, Gemini Pro, Llama 3.1)
@@ -14,6 +15,7 @@ A premium, scalable prompt enhancement application that transforms your prompts 
 - **4 output formats**: Plain Text, Markdown, JSON, XML
 
 ### 🎨 Modern UI Components
+
 - **AI Elements** - Pre-built polished components (Message, Response, PromptInput, Actions, etc.)
 - **shadcn/ui** components with glassmorphism design
 - **Dark/light theme** support with system detection
@@ -22,6 +24,7 @@ A premium, scalable prompt enhancement application that transforms your prompts 
 - **Real-time token/character counting**
 
 ### 📊 Advanced Features
+
 - **Prompt history** with save/load functionality
 - **Usage analytics** and monthly limits
 - **Export capabilities** (TXT, JSON)
@@ -30,17 +33,17 @@ A premium, scalable prompt enhancement application that transforms your prompts 
 
 ## 🚀 Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| **Frontend** | React 19, TypeScript, Vite |
-| **UI Components** | Vercel AI Elements, shadcn/ui |
-| **Styling** | Tailwind CSS |
-| **Animation** | Framer Motion |
-| **Authentication** | Clerk React SDK |
-| **AI Integration** | Vercel AI SDK v5, OpenRouter |
+| Category             | Technology                      |
+| -------------------- | ------------------------------- |
+| **Frontend**         | React 19, TypeScript, Vite      |
+| **UI Components**    | Vercel AI Elements, shadcn/ui   |
+| **Styling**          | Tailwind CSS                    |
+| **Animation**        | Framer Motion                   |
+| **Authentication**   | Clerk React SDK                 |
+| **AI Integration**   | Vercel AI SDK v5, OpenRouter    |
 | **State Management** | React Hook Form, TanStack Query |
-| **Icons** | Remix Icons, Lucide Icons |
-| **Notifications** | Sonner |
+| **Icons**            | Remix Icons, Lucide Icons       |
+| **Notifications**    | Sonner                          |
 
 ## 🎨 AI Elements Integration
 
@@ -48,7 +51,7 @@ This application leverages Vercel AI Elements for a polished chat interface:
 
 - **Message Components**: Styled user and assistant messages with avatars
 - **Response**: Streamdown-powered markdown rendering
-- **PromptInput**: Enhanced input with model selection and toolbars  
+- **PromptInput**: Enhanced input with model selection and toolbars
 - **Actions**: Copy, save, export buttons with tooltips
 - **Suggestions**: Quick-start prompt suggestions
 - **Loader**: Animated loading indicators
@@ -62,36 +65,41 @@ This application leverages Vercel AI Elements for a polished chat interface:
 ## 🛠️ Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/prompt-forge.git
    cd prompt-forge
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env
    ```
-   
+
    Fill in your environment variables:
+
    ```env
    # OpenRouter API Configuration
    OPENROUTER_API_KEY=your_openrouter_api_key_here
-   
+
    # Clerk Authentication
    VITE_CLERK_PUBLISHABLE_KEY=pk_test_your_publishable_key
    CLERK_SECRET_KEY=sk_test_your_secret_key
    ```
 
 4. **Start development servers**
+
    ```bash
    # Start both frontend and API server
    pnpm dev:full
-   
+
    # Or separately:
    pnpm dev      # Frontend only (port 8080)
    pnpm dev:api  # API server only (port 3001)
@@ -113,6 +121,7 @@ vercel --prod
 ### Other Platforms
 
 The app is platform-agnostic and can be deployed to:
+
 - Netlify (with serverless functions)
 - Railway
 - Render
@@ -132,7 +141,7 @@ export const AI_MODELS: ModelConfig[] = [
     provider: 'OpenAI',
     maxTokens: 128000,
     costPer1kTokens: 0.03,
-    description: 'Latest GPT-4 with improved reasoning'
+    description: 'Latest GPT-4 with improved reasoning',
   },
   // Add more models...
 ];
@@ -149,7 +158,7 @@ export const ENHANCEMENT_TECHNIQUES: EnhancementTechnique[] = [
     name: 'Custom Technique',
     description: 'Your custom enhancement method',
     icon: 'RiMagicFill',
-    systemPrompt: 'Your system prompt here...'
+    systemPrompt: 'Your system prompt here...',
   },
   // Add more techniques...
 ];
@@ -166,7 +175,7 @@ export const USER_TIERS: Record<string, UserTier> = {
     maxRequestsPerMonth: 50,
     maxTokensPerRequest: 4000,
     availableModels: ['anthropic/claude-3-haiku'],
-    features: ['Basic enhancement', 'History (7 days)']
+    features: ['Basic enhancement', 'History (7 days)'],
   },
   // Add more tiers...
 };

@@ -1,11 +1,7 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { cn } from '@/lib/utils';
 import type { ToolUIPart } from 'ai';
 import {
@@ -22,10 +18,7 @@ import { CodeBlock } from './code-block';
 export type ToolProps = ComponentProps<typeof Collapsible>;
 
 export const Tool = ({ className, ...props }: ToolProps) => (
-  <Collapsible
-    className={cn('not-prose mb-4 w-full rounded-md border', className)}
-    {...props}
-  />
+  <Collapsible className={cn('not-prose mb-4 w-full rounded-md border', className)} {...props} />
 );
 
 export type ToolHeaderProps = {
@@ -43,39 +36,31 @@ const getStatusBadge = (status: ToolUIPart['state']) => {
   } as const;
 
   const icons = {
-    'input-streaming': <CircleIcon className="size-4" />,
-    'input-available': <ClockIcon className="size-4 animate-pulse" />,
-    'output-available': <CheckCircleIcon className="size-4 text-green-600" />,
-    'output-error': <XCircleIcon className="size-4 text-red-600" />,
+    'input-streaming': <CircleIcon className='size-4' />,
+    'input-available': <ClockIcon className='size-4 animate-pulse' />,
+    'output-available': <CheckCircleIcon className='size-4 text-green-600' />,
+    'output-error': <XCircleIcon className='size-4 text-red-600' />,
   } as const;
 
   return (
-    <Badge className="gap-1.5 rounded-full text-xs" variant="secondary">
+    <Badge className='gap-1.5 rounded-full text-xs' variant='secondary'>
       {icons[status]}
       {labels[status]}
     </Badge>
   );
 };
 
-export const ToolHeader = ({
-  className,
-  type,
-  state,
-  ...props
-}: ToolHeaderProps) => (
+export const ToolHeader = ({ className, type, state, ...props }: ToolHeaderProps) => (
   <CollapsibleTrigger
-    className={cn(
-      'flex w-full items-center justify-between gap-4 p-3',
-      className
-    )}
+    className={cn('flex w-full items-center justify-between gap-4 p-3', className)}
     {...props}
   >
-    <div className="flex items-center gap-2">
-      <WrenchIcon className="size-4 text-muted-foreground" />
-      <span className="font-medium text-sm">{type}</span>
+    <div className='flex items-center gap-2'>
+      <WrenchIcon className='size-4 text-muted-foreground' />
+      <span className='font-medium text-sm'>{type}</span>
       {getStatusBadge(state)}
     </div>
-    <ChevronDownIcon className="size-4 text-muted-foreground transition-transform group-data-[state=open]:rotate-180" />
+    <ChevronDownIcon className='size-4 text-muted-foreground transition-transform group-data-[state=open]:rotate-180' />
   </CollapsibleTrigger>
 );
 
@@ -97,11 +82,11 @@ export type ToolInputProps = ComponentProps<'div'> & {
 
 export const ToolInput = ({ className, input, ...props }: ToolInputProps) => (
   <div className={cn('space-y-2 overflow-hidden p-4', className)} {...props}>
-    <h4 className="font-medium text-muted-foreground text-xs uppercase tracking-wide">
+    <h4 className='font-medium text-muted-foreground text-xs uppercase tracking-wide'>
       Parameters
     </h4>
-    <div className="rounded-md bg-muted/50">
-      <CodeBlock code={JSON.stringify(input, null, 2)} language="json" />
+    <div className='rounded-md bg-muted/50'>
+      <CodeBlock code={JSON.stringify(input, null, 2)} language='json' />
     </div>
   </div>
 );
@@ -111,27 +96,20 @@ export type ToolOutputProps = ComponentProps<'div'> & {
   errorText: ToolUIPart['errorText'];
 };
 
-export const ToolOutput = ({
-  className,
-  output,
-  errorText,
-  ...props
-}: ToolOutputProps) => {
+export const ToolOutput = ({ className, output, errorText, ...props }: ToolOutputProps) => {
   if (!(output || errorText)) {
     return null;
   }
 
   return (
     <div className={cn('space-y-2 p-4', className)} {...props}>
-      <h4 className="font-medium text-muted-foreground text-xs uppercase tracking-wide">
+      <h4 className='font-medium text-muted-foreground text-xs uppercase tracking-wide'>
         {errorText ? 'Error' : 'Result'}
       </h4>
       <div
         className={cn(
           'overflow-x-auto rounded-md text-xs [&_table]:w-full',
-          errorText
-            ? 'bg-destructive/10 text-destructive'
-            : 'bg-muted/50 text-foreground'
+          errorText ? 'bg-destructive/10 text-destructive' : 'bg-muted/50 text-foreground'
         )}
       >
         {errorText && <div>{errorText}</div>}
