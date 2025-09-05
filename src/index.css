@@ -71,5 +71,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Geist', system-ui, sans-serif;
   }
 }
