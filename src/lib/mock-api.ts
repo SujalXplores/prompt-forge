@@ -5,7 +5,7 @@ export async function mockEnhancePrompt(
   userPrompt: string,
   technique: string,
   outputFormat: string,
-  model: string
+  _model: string
 ): Promise<ReadableStream<Uint8Array>> {
   const selectedTechnique = ENHANCEMENT_TECHNIQUES.find(t => t.id === technique);
   const selectedFormat = OUTPUT_FORMATS.find(f => f.id === outputFormat);
@@ -73,7 +73,7 @@ Please proceed with your analysis and provide a comprehensive response following
   });
 }
 
-function getExpertRole(prompt: string): string {
+function getExpertRole(_prompt: string): string {
   const roles = [
     'consultant', 'analyst', 'researcher', 'strategist', 'advisor',
     'specialist', 'practitioner', 'professional', 'expert', 'guide'
@@ -81,7 +81,7 @@ function getExpertRole(prompt: string): string {
   return roles[Math.floor(Math.random() * roles.length)];
 }
 
-function getDomain(prompt: string): string {
+function getDomain(_prompt: string): string {
   const domains = [
     'this field', 'the subject matter', 'relevant methodologies',
     'industry best practices', 'current trends and developments'

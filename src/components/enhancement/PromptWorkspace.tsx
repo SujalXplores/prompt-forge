@@ -12,7 +12,6 @@ import {
 } from '@remixicon/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import {
   Select,
   SelectContent,
@@ -20,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -35,17 +33,12 @@ import {
   PromptInputTextarea,
   PromptInputToolbar,
   PromptInputButton,
-  PromptInputSubmit,
   Response,
   Loader,
   Actions,
   Action,
   Suggestions,
   Suggestion,
-  CodeBlock,
-  CodeBlockCopyButton,
-  Message,
-  MessageContent,
 } from '@/components/ai-elements';
 import {
   useAIEnhancement,
@@ -133,7 +126,7 @@ export function PromptWorkspace() {
     try {
       await navigator.clipboard.writeText(text);
       toast.success('Copied to clipboard!');
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy to clipboard');
     }
   };

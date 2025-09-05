@@ -5,7 +5,7 @@ import { streamText } from 'ai';
 import type { ModelConfig, EnhancementTechnique, OutputFormat } from '../lib/ai-config';
 
 // Create a configured OpenRouter provider
-const createOpenRouterModel = (modelId: string) => {
+const _createOpenRouterModel = (modelId: string) => {
   // Set the API key globally for OpenRouter
   if (typeof window !== 'undefined' && import.meta.env.VITE_OPENROUTER_API_KEY) {
     // For client-side, we need to use a different approach
@@ -98,13 +98,13 @@ export function useAIEnhancement() {
       return enhancementResult;
     } catch (error: unknown) {
       if (error instanceof Error && error.name === 'AbortError') {
-        console.log('Enhancement cancelled by user');
+        // Enhancement cancelled by user
         return null;
       }
 
       const errorMessage = error instanceof Error ? error.message : 'Failed to enhance prompt';
       setError(errorMessage);
-      console.error('Enhancement error:', error);
+      // Enhancement error logged to state
       return null;
     } finally {
       setIsEnhancing(false);
@@ -166,8 +166,8 @@ export function usePromptHistory() {
       const existingHistory = savedHistory ? JSON.parse(savedHistory) : [];
       const newHistory = [result, ...existingHistory.slice(0, 49)];
       localStorage.setItem('promptforge-history', JSON.stringify(newHistory));
-    } catch (error) {
-      console.error('Error saving history:', error);
+    } catch {
+      // Error saving history - silently fail to not disrupt user experience
     }
   }, [addToHistory]);
 
@@ -178,8 +178,8 @@ export function usePromptHistory() {
         const parsedHistory = JSON.parse(savedHistory);
         setHistory(parsedHistory);
       }
-    } catch (error) {
-      console.error('Error loading history:', error);
+    } catch {
+      // Error loading history - silently fail and continue with empty history
     }
   }, []);
 
@@ -187,8 +187,8 @@ export function usePromptHistory() {
     setHistory([]);
     try {
       localStorage.removeItem('promptforge-history');
-    } catch (error) {
-      console.error('Error clearing history:', error);
+    } catch {
+      // Error clearing history - silently fail
     }
   }, []);
 
@@ -197,8 +197,8 @@ export function usePromptHistory() {
       const newHistory = prev.filter((_, i) => i !== index);
       try {
         localStorage.setItem('promptforge-history', JSON.stringify(newHistory));
-      } catch (error) {
-        console.error('Error saving history:', error);
+      } catch {
+        // Error saving history - silently fail
       }
       return newHistory;
     });
@@ -247,8 +247,8 @@ export function useUsageStats() {
       // Save to localStorage
       try {
         localStorage.setItem('promptforge-stats', JSON.stringify(newStats));
-      } catch (error) {
-        console.error('Error saving stats:', error);
+      } catch {
+        // Error saving stats - silently fail
       }
 
       return newStats;
@@ -274,8 +274,8 @@ export function useUsageStats() {
     if (savedStats) {
       try {
         setStats(JSON.parse(savedStats));
-      } catch (error) {
-        console.error('Error loading stats:', error);
+      } catch {
+        // Error loading stats - silently fail and use default stats
       }
     }
   }, []);
@@ -284,8 +284,8 @@ export function useUsageStats() {
   const saveStats = useCallback((newStats: typeof stats) => {
     try {
       localStorage.setItem('promptforge-stats', JSON.stringify(newStats));
-    } catch (error) {
-      console.error('Error saving stats:', error);
+    } catch {
+      // Error saving stats - silently fail
     }
   }, []);
 

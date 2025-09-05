@@ -12,12 +12,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import type { ChatStatus } from 'ai';
 import { Loader2Icon, SendIcon, SquareIcon, XIcon } from 'lucide-react';
-import type {
-  ComponentProps,
-  HTMLAttributes,
-  KeyboardEventHandler,
+import {
+  Children,
+  type ComponentProps,
+  type HTMLAttributes,
+  type KeyboardEventHandler,
 } from 'react';
-import { Children } from 'react';
 
 export type PromptInputProps = HTMLAttributes<HTMLFormElement>;
 
@@ -40,8 +40,8 @@ export const PromptInputTextarea = ({
   onChange,
   className,
   placeholder = 'What would you like to know?',
-  minHeight = 48,
-  maxHeight = 164,
+  minHeight: _minHeight = 48,
+  maxHeight: _maxHeight = 164,
   ...props
 }: PromptInputTextareaProps) => {
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
@@ -121,7 +121,7 @@ export const PromptInputButton = ({
   ...props
 }: PromptInputButtonProps) => {
   const newSize =
-    (size ?? Children.count(props.children) > 1) ? 'default' : 'icon';
+    size ?? Children.count(props.children) > 1 ? 'default' : 'icon';
 
   return (
     <Button

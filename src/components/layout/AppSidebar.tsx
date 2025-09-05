@@ -78,7 +78,7 @@ export function AppSidebar({ onClose }: AppSidebarProps) {
             </Badge>
           </div>
           <div className="space-y-2">
-            {ENHANCEMENT_TECHNIQUES.map((technique, index) => {
+            {ENHANCEMENT_TECHNIQUES.map((technique, _index) => {
               const IconComponent =
                 iconMap[technique.icon as keyof typeof iconMap] || RiMagicFill;
 
@@ -112,7 +112,7 @@ export function AppSidebar({ onClose }: AppSidebarProps) {
           <h3 className="text-base sm:text-lg font-semibold">Quick Actions</h3>
           <div className="space-y-2">
             <Actions className="flex-col items-stretch gap-2">
-              {sidebarItems.map((item, index) => (
+              {sidebarItems.map((item, _index) => (
                 <Action
                   key={item.name}
                   className="justify-start p-2.5 sm:p-3 h-auto"
