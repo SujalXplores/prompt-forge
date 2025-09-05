@@ -4,7 +4,7 @@ import { streamText } from 'ai';
 import type { ModelConfig, EnhancementTechnique, OutputFormat } from '../lib/ai-config';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 
-export interface EnhancementRequest {
+interface EnhancementRequest {
   content: string;
   model: ModelConfig;
   technique: EnhancementTechnique;
@@ -12,7 +12,7 @@ export interface EnhancementRequest {
   customInstructions?: string;
 }
 
-export interface EnhancementResult {
+interface EnhancementResult {
   enhanced: string;
   originalLength: number;
   enhancedLength: number;
@@ -123,174 +123,5 @@ export function useAIEnhancement() {
     isEnhancing,
     enhancedContent,
     error,
-  };
-}
-
-// Hook for managing prompt history
-export function usePromptHistory() {
-  const [history, setHistory] = useState<EnhancementResult[]>([]);
-
-  const addToHistory = useCallback((result: EnhancementResult) => {
-    setHistory(prev => [result, ...prev.slice(0, 49)]); // Keep last 50 items
-  }, []);
-
-  const saveToHistory = useCallback(
-    (historyItem: {
-      originalPrompt: string;
-      enhancedPrompt: string;
-      technique: string;
-      model: string;
-      outputFormat: string;
-    }) => {
-      const result: EnhancementResult = {
-        enhanced: historyItem.enhancedPrompt,
-        originalLength: historyItem.originalPrompt.length,
-        enhancedLength: historyItem.enhancedPrompt.length,
-        model: historyItem.model,
-        technique: historyItem.technique,
-        timestamp: new Date(),
-      };
-
-      addToHistory(result);
-
-      // Save to localStorage
-      try {
-        const savedHistory = localStorage.getItem('promptforge-history');
-        const existingHistory = savedHistory ? JSON.parse(savedHistory) : [];
-        const newHistory = [result, ...existingHistory.slice(0, 49)];
-        localStorage.setItem('promptforge-history', JSON.stringify(newHistory));
-      } catch {
-        // Error saving history - silently fail to not disrupt user experience
-      }
-    },
-    [addToHistory]
-  );
-
-  const loadHistory = useCallback(() => {
-    try {
-      const savedHistory = localStorage.getItem('promptforge-history');
-      if (savedHistory) {
-        const parsedHistory = JSON.parse(savedHistory);
-        setHistory(parsedHistory);
-      }
-    } catch {
-      // Error loading history - silently fail and continue with empty history
-    }
-  }, []);
-
-  const clearHistory = useCallback(() => {
-    setHistory([]);
-    try {
-      localStorage.removeItem('promptforge-history');
-    } catch {
-      // Error clearing history - silently fail
-    }
-  }, []);
-
-  const removeFromHistory = useCallback((index: number) => {
-    setHistory(prev => {
-      const newHistory = prev.filter((_, i) => i !== index);
-      try {
-        localStorage.setItem('promptforge-history', JSON.stringify(newHistory));
-      } catch {
-        // Error saving history - silently fail
-      }
-      return newHistory;
-    });
-  }, []);
-
-  return {
-    history,
-    addToHistory,
-    saveToHistory,
-    loadHistory,
-    clearHistory,
-    removeFromHistory,
-  };
-}
-
-// Hook for usage statistics
-export function useUsageStats() {
-  const [stats, setStats] = useState({
-    promptsEnhanced: 0,
-    tokensUsed: 0,
-    totalCharacters: 0,
-    averageEnhancementTime: 0,
-    favoriteModel: '',
-    favoriteTechnique: '',
-    usagePercentage: 0,
-    monthlyLimit: 1000, // Free tier limit
-  });
-
-  const updateStats = useCallback((result: EnhancementResult, enhancementTime: number) => {
-    setStats(prev => {
-      const newPromptsEnhanced = prev.promptsEnhanced + 1;
-      const newTokensUsed = prev.tokensUsed + (result.tokensUsed || 0);
-      const newUsagePercentage = (newPromptsEnhanced / prev.monthlyLimit) * 100;
-
-      const newStats = {
-        promptsEnhanced: newPromptsEnhanced,
-        tokensUsed: newTokensUsed,
-        totalCharacters: prev.totalCharacters + result.enhancedLength,
-        averageEnhancementTime:
-          (prev.averageEnhancementTime * prev.promptsEnhanced + enhancementTime) /
-          newPromptsEnhanced,
-        favoriteModel: result.model, // Simple implementation - could be more sophisticated
-        favoriteTechnique: result.technique,
-        usagePercentage: Math.min(newUsagePercentage, 100),
-        monthlyLimit: prev.monthlyLimit,
-      };
-
-      // Save to localStorage
-      try {
-        localStorage.setItem('promptforge-stats', JSON.stringify(newStats));
-      } catch {
-        // Error saving stats - silently fail
-      }
-
-      return newStats;
-    });
-  }, []);
-
-  const resetStats = useCallback(() => {
-    setStats({
-      promptsEnhanced: 0,
-      tokensUsed: 0,
-      totalCharacters: 0,
-      averageEnhancementTime: 0,
-      favoriteModel: '',
-      favoriteTechnique: '',
-      usagePercentage: 0,
-      monthlyLimit: 1000,
-    });
-  }, []);
-
-  const loadStats = useCallback(() => {
-    // In a real app, this would load from localStorage or API
-    const savedStats = localStorage.getItem('promptforge-stats');
-    if (savedStats) {
-      try {
-        setStats(JSON.parse(savedStats));
-      } catch {
-        // Error loading stats - silently fail and use default stats
-      }
-    }
-  }, []);
-
-  // Save stats to localStorage whenever they change
-  const saveStats = useCallback((newStats: typeof stats) => {
-    try {
-      localStorage.setItem('promptforge-stats', JSON.stringify(newStats));
-    } catch {
-      // Error saving stats - silently fail
-    }
-  }, []);
-
-  return {
-    stats,
-    updateStats,
-    resetStats,
-    loadStats,
-    saveStats,
   };
 }

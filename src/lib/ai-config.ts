@@ -22,32 +22,12 @@ export interface OutputFormat {
   template: string;
 }
 
-export interface PromptHistoryItem {
-  id: string;
-  originalPrompt: string;
-  enhancedPrompt: string;
-  technique: string;
-  model: string;
-  outputFormat: string;
-  timestamp: Date;
-  tokenCount: number;
-  charCount: number;
-}
-
 export interface EnhanceRequest {
   userPrompt: string;
   system: string;
   model: string;
   technique: string;
   outputFormat: string;
-}
-
-export interface UserTier {
-  name: string;
-  maxRequestsPerMonth: number;
-  maxTokensPerRequest: number;
-  availableModels: string[];
-  features: string[];
 }
 
 export const AI_MODELS: Record<string, ModelConfig> = {
@@ -97,131 +77,126 @@ export const ENHANCEMENT_TECHNIQUES: Record<string, EnhancementTechnique> = {
   'chain-of-thought': {
     id: 'chain-of-thought',
     name: 'Chain of Thought',
-    description: 'Step-by-step reasoning and analysis',
+    description: 'A linear reasoning method that breaks down complex tasks into a series of manageable subproblems.',
     icon: 'RiBrainLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Chain of Thought reasoning.
 
 Guidelines:
-1. Analyze the user's intent and break down the task into logical steps
-2. Add explicit reasoning steps using "Let me think step by step"
-3. Include intermediate reasoning that leads to the final answer
-4. Make implicit knowledge explicit
-5. Add verification steps where appropriate
+1. Deconstruct the user's request by outlining a clear, logical progression of steps.
+2. Within a <thinking> tag, articulate your step-by-step reasoning process.
+3. Make implicit assumptions and knowledge explicit.
+4. Include error-checking and verification steps where appropriate.
+5. Conclude with a final, synthesized response.
 
-Transform the prompt to encourage step-by-step thinking while maintaining the original intent.`,
+Transform the prompt to encourage this structured, step-by-step thinking.`,
   },
   'few-shot': {
     id: 'few-shot',
     name: 'Few-Shot Learning',
-    description: 'Learning through examples and demonstrations',
+    description: 'A highly effective technique that provides a model with a small number of high-quality examples to guide its behavior.',
     icon: 'RiLightbulbFill',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Few-Shot learning techniques.
 
 Guidelines:
-1. Add 2-3 high-quality examples that demonstrate the desired output
-2. Each example should show input → reasoning → output format
-3. Examples should cover different scenarios or edge cases
-4. Use consistent formatting across examples
-5. Make the pattern clear and replicable
+1. Add 2-3 high-quality, representative examples that align precisely with the user's task.
+2. Each example should demonstrate the desired input-output pattern clearly.
+3. Use consistent formatting, such as XML-like markup or clear delimiters, to separate examples from the main instruction.
+4. Examples should cover key patterns or edge cases to guide the AI's response without needing a long-form description.
 
 Transform the prompt to include relevant examples that guide the AI's response.`,
   },
   'zero-shot': {
     id: 'zero-shot',
     name: 'Zero-Shot',
-    description: 'Direct instruction without examples',
+    description: 'The simplest and most cost-effective prompting method, relying solely on the models pre-trained knowledge to generate a response.',
     icon: 'RiMagicFill',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Zero-Shot techniques.
 
 Guidelines:
-1. Make instructions extremely clear and specific
-2. Define the role and context explicitly
-3. Specify the exact output format and structure
-4. Include constraints and requirements
-5. Add quality criteria and evaluation metrics
+1. Make instructions exceptionally clear and specific using strong action verbs.
+2. Define the AI's role and context explicitly at the beginning.
+3. Specify the exact output format, length, and structure.
+4. Include all necessary constraints and requirements to prevent ambiguity.
 
-Transform the prompt to be self-contained and crystal clear without needing examples.`,
+Transform the prompt to be self-contained and crystal clear.`,
   },
   'role-based': {
     id: 'role-based',
     name: 'Role-Based',
-    description: 'Assign specific expert roles and personas',
+    description: 'A powerful technique for "priming" a model to adopt a specific expert identity, tone, and perspective.',
     icon: 'RiUserLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Role-Based prompting.
 
 Guidelines:
-1. Assign a specific expert role or persona to the AI
-2. Include relevant background, expertise, and perspective
-3. Define the context and situation clearly
-4. Add professional standards and methodologies
-5. Include domain-specific language and frameworks
+1. Assign a specific, gender-neutral expert role or persona to the AI.
+2. Define the relevant background, expertise, and perspective of this persona.
+3. Explicitly state professional standards, methodologies, and domain-specific language to be used.
+4. Clearly separate the role assignment from the primary task using delimiters.
 
 Transform the prompt to leverage expert knowledge and professional perspective.`,
   },
   'meta-prompting': {
     id: 'meta-prompting',
     name: 'Meta-Prompting',
-    description: 'Self-reflective and adaptive prompting',
+    description: 'A structural technique that guides a model to generate and refine its own prompts, creating a self-improving, adaptive loop.',
     icon: 'RiRecycleLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Meta-Prompting techniques.
 
 Guidelines:
-1. Add self-reflection and critique mechanisms
-2. Include iterative improvement instructions
-3. Add quality assessment criteria
-4. Include error checking and validation steps
-5. Make the AI question and refine its own approach
+1. Add a self-reflection mechanism that encourages the AI to critique and refine its own initial approach.
+2. Instruct the AI to generate an improved, more specific prompt based on this critique.
+3. Include iterative improvement instructions and quality assessment criteria for the final output.
+4. Add error checking and validation steps to be performed at each stage.
 
 Transform the prompt to be self-improving and adaptive.`,
   },
   'tree-of-thought': {
     id: 'tree-of-thought',
     name: 'Tree of Thought',
-    description: 'Explore multiple reasoning paths',
+    description: 'A branching, non-linear reasoning approach that allows a model to explore multiple solution paths simultaneously.',
     icon: 'RiNodeTree',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Tree of Thought reasoning.
 
 Guidelines:
-1. Encourage exploration of multiple solution paths
-2. Add branching points for different approaches
-3. Include evaluation criteria for each path
-4. Add backtracking and alternative exploration
-5. Combine insights from different reasoning branches
+1. Decompose the problem into a tree of manageable "thoughts."
+2. Encourage the exploration of multiple, distinct reasoning paths or hypotheses.
+3. For each path, define and apply an evaluation criterion (e.g., coherence, feasibility).
+4. Add a mechanism for backtracking and exploring alternative branches if a path fails.
+5. Synthesize the most promising insights from different branches to form a robust final answer.
 
 Transform the prompt to explore multiple reasoning paths before concluding.`,
   },
   'self-consistency': {
     id: 'self-consistency',
     name: 'Self-Consistency',
-    description: 'Multiple reasoning paths with consensus',
+    description: 'A strategy that generates multiple independent reasoning paths and then selects the most consistent answer.',
     icon: 'RiCheckDoubleLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt using Self-Consistency techniques.
 
 Guidelines:
-1. Generate multiple independent reasoning paths
-2. Compare and contrast different approaches
-3. Identify consensus and disagreements
-4. Add confidence scoring for different solutions
-5. Synthesize the most robust answer
+1. Generate at least three independent and distinct reasoning paths to solve the problem.
+2. Clearly present each solution path.
+3. Compare and contrast the final answers from each path.
+4. Identify the consensus solution and synthesize a final, robust answer based on majority agreement.
+5. Include a confidence score based on the level of consensus.
 
 Transform the prompt to generate and compare multiple solutions.`,
   },
   'structured-output': {
     id: 'structured-output',
     name: 'Structured Output',
-    description: 'Enforce specific output formats and schemas',
+    description: 'A method to enforce specific output formats and schemas for reliable data exchange.',
     icon: 'RiCodeBoxLine',
     systemPrompt: `You are an expert prompt engineer. Your task is to enhance the given prompt to ensure structured, formatted output.
 
 Guidelines:
-1. Define exact output format and schema
-2. Include formatting examples and templates
-3. Add validation rules and constraints
-4. Specify required fields and optional elements
-5. Include error handling for malformed outputs
+1. Define the exact output format and schema.
+2. Include formatting examples and validation rules.
+3. Specify required fields and optional elements.
+4. Include error handling for malformed outputs.
 
 Transform the prompt to produce consistent, structured responses.`,
-  },
+  }
 };
 
 export const OUTPUT_FORMATS: Record<string, OutputFormat> = {
@@ -246,7 +221,9 @@ export const OUTPUT_FORMATS: Record<string, OutputFormat> = {
     id: 'json',
     name: 'JSON',
     description: 'Structured JSON object',
-    template: `Provide your response as a valid JSON object with this structure:
+    template: `Respond only with a single, valid JSON object, and no other text or explanation.
+
+Your response must follow this structure:
 {
   "summary": "Brief overview",
   "analysis": "Detailed analysis",
@@ -262,7 +239,9 @@ export const OUTPUT_FORMATS: Record<string, OutputFormat> = {
     id: 'xml',
     name: 'XML',
     description: 'Structured XML format',
-    template: `Provide your response as well-formed XML:
+    template: `Respond only with a single, well-formed XML response, and no other text or explanation.
+
+Your response must follow this structure:
 <?xml version="1.0" encoding="UTF-8"?>
 <response>
   <summary>Brief overview</summary>
@@ -276,29 +255,5 @@ export const OUTPUT_FORMATS: Record<string, OutputFormat> = {
     <technique>method_used</technique>
   </metadata>
 </response>`,
-  },
-};
-
-export const USER_TIERS: Record<string, UserTier> = {
-  free: {
-    name: 'Free',
-    maxRequestsPerMonth: 50,
-    maxTokensPerRequest: 4000,
-    availableModels: ['deepseek-r1', 'gemini-2.5-flash'],
-    features: ['Basic enhancement', 'History (7 days)', 'Export'],
-  },
-  pro: {
-    name: 'Pro',
-    maxRequestsPerMonth: 1000,
-    maxTokensPerRequest: 16000,
-    availableModels: ['deepseek-r1', 'gemini-2.5-flash', 'gemini-2.5-pro', 'claude-sonnet-4-0'],
-    features: ['All techniques', 'History (30 days)', 'Export', 'Templates', 'Priority support'],
-  },
-  enterprise: {
-    name: 'Enterprise',
-    maxRequestsPerMonth: -1, // Unlimited
-    maxTokensPerRequest: 128000,
-    availableModels: Object.keys(AI_MODELS),
-    features: ['Unlimited', 'All models', 'Custom techniques', 'API access', 'Team collaboration'],
   },
 };

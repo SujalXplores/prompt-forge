@@ -91,7 +91,6 @@ This application leverages Vercel AI Elements for a polished chat interface:
 
    # Clerk Authentication
    VITE_CLERK_PUBLISHABLE_KEY=pk_test_your_publishable_key
-   CLERK_SECRET_KEY=sk_test_your_secret_key
    ```
 
 4. **Start development servers**
