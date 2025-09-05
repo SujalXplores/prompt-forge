@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'sonner';
 import {
   PromptInput,
@@ -249,7 +250,7 @@ export function PromptWorkspace() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className='min-h-[200px] bg-muted/50 border rounded-lg p-4 relative'>
+            <ScrollArea className='h-[200px] w-full rounded-lg border bg-muted/50 p-4'>
               {error ? (
                 <div className='flex items-center justify-center h-full text-destructive'>
                   <div className='text-center space-y-2'>
@@ -281,7 +282,7 @@ export function PromptWorkspace() {
                   </div>
                 </div>
               )}
-            </div>
+            </ScrollArea>
 
             {enhancedContent && (
               <div className='flex justify-end mt-4'>
