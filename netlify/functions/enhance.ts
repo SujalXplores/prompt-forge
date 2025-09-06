@@ -6,11 +6,28 @@ const openrouter = createOpenRouter({
   apiKey: process.env.OPENROUTER_API_KEY, // Note: no VITE_ prefix for server-side
 });
 
+const corsHeaders = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
 export const handler: Handler = async (event: HandlerEvent, _context: HandlerContext) => {
+  // Handle OPTIONS request for CORS
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: '',
+    };
+  }
+
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
@@ -21,6 +38,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
     if (!model || !prompt) {
       return {
         statusCode: 400,
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'Missing required parameters: model and prompt' }),
       };
     }
@@ -29,6 +47,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
     if (!process.env.OPENROUTER_API_KEY) {
       return {
         statusCode: 500,
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'OpenRouter API key not configured' }),
       };
     }
@@ -47,12 +66,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({
         content: fullResponse,
         usage: result.usage,
@@ -62,10 +76,7 @@ export const handler: Handler = async (event: HandlerEvent, _context: HandlerCon
     // Log error for debugging (will be available in Netlify function logs)
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: corsHeaders,
       body: JSON.stringify({
         error: error instanceof Error ? error.message : 'Failed to enhance prompt',
       }),
