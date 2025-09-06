@@ -1,0 +1,15 @@
+[build]
+  command = "pnpm run build"
+  functions = "netlify/functions"
+  publish = "dist"
+
+# Configure secrets scanning to ignore Clerk publishable key
+# Clerk publishable keys are safe to expose in client-side code
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "VITE_CLERK_PUBLISHABLE_KEY"
+
+# Redirect API calls to serverless functions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

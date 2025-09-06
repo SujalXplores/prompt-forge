@@ -124,10 +124,10 @@ cp .env.example .env
 
 Add your keys to `.env`:
 ```env
-# OpenRouter API Configuration
-VITE_OPENROUTER_API_KEY=your_openrouter_api_key_here
+# OpenRouter API Configuration (Server-side only)
+OPENROUTER_API_KEY=your_openrouter_api_key_here
 
-# Clerk Authentication
+# Clerk Authentication (Client-side safe)
 VITE_CLERK_PUBLISHABLE_KEY=pk_test_your_publishable_key
 ```
 

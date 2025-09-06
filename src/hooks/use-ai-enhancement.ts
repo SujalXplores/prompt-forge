@@ -1,8 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { useUser } from '@clerk/clerk-react';
-import { streamText } from 'ai';
 import type { ModelConfig, EnhancementTechnique, OutputFormat } from '../lib/ai-config';
-import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 
 interface EnhancementRequest {
   content: string;
@@ -21,10 +19,6 @@ interface EnhancementResult {
   timestamp: Date;
   tokensUsed?: number;
 }
-
-const openrouter = createOpenRouter({
-  apiKey: import.meta.env.VITE_OPENROUTER_API_KEY,
-});
 
 export function useAIEnhancement() {
   const { user } = useUser();
@@ -59,22 +53,30 @@ export function useAIEnhancement() {
 
         enhancedPrompt += 'Please provide the enhanced version following all guidelines above.';
 
-
-        // Create the AI stream with OpenRouter provider
-        const result = streamText({
-          model: openrouter(request.model.id),
-          prompt: enhancedPrompt,
-          temperature: 0.7,
-          abortSignal: abortControllerRef.current.signal,
+        // Call our serverless function instead of OpenRouter directly
+        const response = await fetch('/api/enhance', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: request.model.id,
+            prompt: enhancedPrompt,
+            temperature: 0.7,
+          }),
+          signal: abortControllerRef.current.signal,
         });
 
-        let fullResponse = '';
-
-        // Stream the response
-        for await (const chunk of result.textStream) {
-          fullResponse += chunk;
-          setEnhancedContent(fullResponse);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to enhance prompt');
         }
+
+        const result = await response.json();
+        const fullResponse = result.content;
+        
+        // Set the enhanced content
+        setEnhancedContent(fullResponse);
 
         const enhancementResult: EnhancementResult = {
           enhanced: fullResponse,
