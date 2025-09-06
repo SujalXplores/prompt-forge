@@ -3,6 +3,10 @@
   functions = "netlify/functions"
   publish = "dist"
 
+[dev]
+  command = "pnpm dev"
+  targetPort = 8080
+
 # Configure secrets scanning to ignore Clerk publishable key
 # Clerk publishable keys are safe to expose in client-side code
 [build.environment]
