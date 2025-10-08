@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import {
   RiSparklingLine,
   RiClipboardLine,
@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { Response, Loader } from '@/components/ai-elements';
 import { StatsDisplay } from './StatsDisplay';
+import { useClipboard } from '@/hooks/use-clipboard';
 
 interface PromptOutputSectionProps {
   enhancedContent: string;
@@ -22,21 +23,25 @@ interface PromptOutputSectionProps {
 
 export const PromptOutputSection = memo(
   ({ enhancedContent, isEnhancing, error, className }: PromptOutputSectionProps) => {
-    const [isCopying, setIsCopying] = useState(false);
+    const { copy, copied, error: clipboardError } = useClipboard({ timeout: 2000 });
 
-    const handleCopy = useCallback(async () => {
+    const handleCopy = useCallback(() => {
       if (!enhancedContent) return;
+      copy(enhancedContent);
+    }, [enhancedContent, copy]);
 
-      try {
-        setIsCopying(true);
-        await navigator.clipboard.writeText(enhancedContent);
+    // Handle clipboard feedback
+    useEffect(() => {
+      if (copied) {
         toast.success('Enhanced prompt copied to clipboard!');
-      } catch {
-        toast.error('Failed to copy to clipboard');
-      } finally {
-        setIsCopying(false);
       }
-    }, [enhancedContent]);
+    }, [copied]);
+
+    useEffect(() => {
+      if (clipboardError) {
+        toast.error('Failed to copy to clipboard');
+      }
+    }, [clipboardError]);
 
     const renderContent = () => {
       if (error) {
@@ -110,11 +115,11 @@ export const PromptOutputSection = memo(
               <Button
                 variant='outline'
                 onClick={handleCopy}
-                disabled={isCopying || !enhancedContent}
+                disabled={copied || !enhancedContent}
                 className='min-w-[140px]'
               >
                 <RiClipboardLine className='w-4 h-4 mr-2' />
-                {isCopying ? 'Copying...' : 'Copy Enhanced'}
+                {copied ? 'Copied!' : 'Copy Enhanced'}
               </Button>
             </div>
           </div>
