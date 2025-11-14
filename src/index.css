@@ -1,6 +1,219 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@theme {
+  --font-sans:
+    Geist, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+  --font-mono: Geist Mono, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility streaming-cursor {
+  /* Streaming cursor animation */
+  @apply inline-block;
+  animation: cursor-blink 1s ease-in-out infinite;
+}
+
+@utility prose {
+  /* Better prose spacing for streaming content */
+  &.streaming-prose {
+    @apply leading-7;
+  }
+
+  &.streaming-prose p {
+    @apply mb-4 last:mb-0;
+  }
+
+  &.streaming-prose h1 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  &.streaming-prose h2 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  &.streaming-prose h3 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  &.streaming-prose h4 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  &.streaming-prose ul {
+    @apply my-4 space-y-2;
+  }
+
+  &.streaming-prose ol {
+    @apply my-4 space-y-2;
+  }
+
+  &.streaming-prose li {
+    @apply leading-relaxed;
+  }
+
+  &.streaming-prose blockquote {
+    @apply my-4 border-l-4 border-border pl-4 italic;
+  }
+
+  &.streaming-prose code {
+    @apply px-1.5 py-0.5 rounded bg-muted text-muted-foreground;
+  }
+
+  &.streaming-prose pre {
+    @apply my-4 p-4 rounded-lg bg-muted overflow-x-auto;
+  }
+
+  &.streaming-prose pre code {
+    @apply p-0 bg-transparent;
+  }
+}
+
+@utility streaming-prose {
+  /* Better prose spacing for streaming content */
+  &.prose {
+    @apply leading-7;
+  }
+
+  &.prose p {
+    @apply mb-4 last:mb-0;
+  }
+
+  &.prose h1 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  & .prose h2 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  & .prose h3 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  & .prose h4 {
+    @apply mt-6 mb-4 first:mt-0;
+  }
+
+  &.prose ul {
+    @apply my-4 space-y-2;
+  }
+
+  & .prose ol {
+    @apply my-4 space-y-2;
+  }
+
+  &.prose li {
+    @apply leading-relaxed;
+  }
+
+  &.prose blockquote {
+    @apply my-4 border-l-4 border-border pl-4 italic;
+  }
+
+  &.prose code {
+    @apply px-1.5 py-0.5 rounded bg-muted text-muted-foreground;
+  }
+
+  &.prose pre {
+    @apply my-4 p-4 rounded-lg bg-muted overflow-x-auto;
+  }
+
+  &.prose pre code {
+    @apply p-0 bg-transparent;
+  }
+}
 
 @layer base {
   :root {
@@ -76,11 +289,6 @@
 }
 
 @layer components {
-  /* Streaming cursor animation */
-  .streaming-cursor {
-    @apply inline-block;
-    animation: cursor-blink 1s ease-in-out infinite;
-  }
 
   @keyframes cursor-blink {
     0%,
@@ -91,46 +299,5 @@
     100% {
       opacity: 0.3;
     }
-  }
-
-  /* Better prose spacing for streaming content */
-  .prose.streaming-prose {
-    @apply leading-7;
-  }
-
-  .prose.streaming-prose p {
-    @apply mb-4 last:mb-0;
-  }
-
-  .prose.streaming-prose h1,
-  .prose.streaming-prose h2,
-  .prose.streaming-prose h3,
-  .prose.streaming-prose h4 {
-    @apply mt-6 mb-4 first:mt-0;
-  }
-
-  .prose.streaming-prose ul,
-  .prose.streaming-prose ol {
-    @apply my-4 space-y-2;
-  }
-
-  .prose.streaming-prose li {
-    @apply leading-relaxed;
-  }
-
-  .prose.streaming-prose blockquote {
-    @apply my-4 border-l-4 border-border pl-4 italic;
-  }
-
-  .prose.streaming-prose code {
-    @apply px-1.5 py-0.5 rounded bg-muted text-muted-foreground;
-  }
-
-  .prose.streaming-prose pre {
-    @apply my-4 p-4 rounded-lg bg-muted overflow-x-auto;
-  }
-
-  .prose.streaming-prose pre code {
-    @apply p-0 bg-transparent;
   }
 }

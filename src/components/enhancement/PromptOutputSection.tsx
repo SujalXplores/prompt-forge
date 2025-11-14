@@ -68,7 +68,7 @@ export const PromptOutputSection = memo(
           <div className='flex items-center justify-center h-full min-h-[300px]'>
             <div className='text-center space-y-6'>
               <div className='flex justify-center'>
-                <div className='w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center'>
+                <div className='w-16 h-16 bg-linear-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center'>
                   <Loader size={24} className='text-white' />
                 </div>
               </div>
@@ -97,7 +97,7 @@ export const PromptOutputSection = memo(
                   </Response>
                   {isEnhancing && (
                     <span className='inline-flex items-center ml-1 streaming-cursor'>
-                      <span className='w-3 h-5 bg-gradient-to-b from-primary via-blue-500 to-primary rounded-sm shadow-sm border border-primary/20' />
+                      <span className='w-3 h-5 bg-linear-to-b from-primary via-blue-500 to-primary rounded-sm shadow-xs border border-primary/20' />
                     </span>
                   )}
                 </div>
@@ -129,7 +129,7 @@ export const PromptOutputSection = memo(
       return (
         <div className='flex items-center justify-center h-full min-h-[300px]'>
           <div className='text-center space-y-6 max-w-lg'>
-            <div className='w-20 h-20 mx-auto bg-gradient-to-br from-muted to-muted/50 rounded-full flex items-center justify-center'>
+            <div className='w-20 h-20 mx-auto bg-linear-to-br from-muted to-muted/50 rounded-full flex items-center justify-center'>
               <RiSparklingLine className='w-10 h-10 text-muted-foreground/50' />
             </div>
             <div className='space-y-3'>
@@ -151,7 +151,7 @@ export const PromptOutputSection = memo(
         <CardHeader>
           <CardTitle className='flex items-center justify-between'>
             <div className='flex items-center gap-3'>
-              <div className='w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center'>
+              <div className='w-8 h-8 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center'>
                 <RiSparklingLine className='w-4 h-4 text-white' />
               </div>
               <div>

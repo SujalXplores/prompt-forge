@@ -32,7 +32,7 @@ export const PromptInput = ({ className, onSubmit, ...props }: PromptInputProps)
   return (
     <form
       className={cn(
-        'w-full divide-y overflow-hidden rounded-xl border bg-background shadow-sm',
+        'w-full divide-y overflow-hidden rounded-xl border bg-background shadow-xs',
         className
       )}
       onSubmit={handleSubmit}
@@ -77,7 +77,7 @@ export const PromptInputTextarea = ({
   return (
     <Textarea
       className={cn(
-        'w-full resize-none rounded-none border-none p-3 shadow-none outline-none ring-0',
+        'w-full resize-none rounded-none border-none p-3 shadow-none outline-hidden ring-0',
         'field-sizing-content max-h-[6lh] bg-transparent dark:bg-transparent',
         'focus-visible:ring-0',
         className
@@ -187,7 +187,7 @@ export const PromptInputModelSelectTrigger = ({
   <SelectTrigger
     className={cn(
       'border-none bg-transparent font-medium text-muted-foreground shadow-none transition-colors',
-      'hover:bg-accent hover:text-foreground [&[aria-expanded="true"]]:bg-accent [&[aria-expanded="true"]]:text-foreground',
+      'hover:bg-accent hover:text-foreground aria-expanded:bg-accent aria-expanded:text-foreground',
       className
     )}
     {...props}

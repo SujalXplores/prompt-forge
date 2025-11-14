@@ -66,7 +66,7 @@ export function PromptWorkspace() {
   }, [resetToDefaults, reset]);
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-background via-background to-muted/20'>
+    <div className='min-h-screen bg-linear-to-br from-background via-background to-muted/20'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-12'>
         <div className='max-w-6xl mx-auto space-y-12'>
           {/* Header */}

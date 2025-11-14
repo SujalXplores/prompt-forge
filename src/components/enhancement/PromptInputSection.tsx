@@ -62,7 +62,7 @@ export const PromptInputSection = memo(
         <CardHeader>
           <CardTitle className='flex items-center justify-between'>
             <div className='flex items-center gap-3'>
-              <div className='w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center'>
+              <div className='w-8 h-8 bg-linear-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center'>
                 <RiSparklingLine className='w-4 h-4 text-white' />
               </div>
               <div>

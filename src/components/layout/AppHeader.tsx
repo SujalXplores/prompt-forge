@@ -8,11 +8,11 @@ export function AppHeader() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className='border-b sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+    <header className='border-b sticky top-0 z-50 w-full bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between'>
         {/* Logo and branding */}
         <div className='flex items-center gap-3'>
-          <div className='flex items-center justify-center w-10 h-10 bg-primary rounded-md shadow'>
+          <div className='flex items-center justify-center w-10 h-10 bg-primary rounded-md shadow-sm'>
             <RiSparklingLine className='w-6 h-6 text-primary-foreground' />
           </div>
           <div className='flex flex-col'>
@@ -42,7 +42,7 @@ export function AppHeader() {
 
           <SignedOut>
             <SignInButton>
-              <Button size='sm' className='shadow'>
+              <Button size='sm' className='shadow-sm'>
                 Sign In
               </Button>
             </SignInButton>

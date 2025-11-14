@@ -83,7 +83,7 @@ const NotFound = () => {
               <ul className='text-sm text-muted-foreground space-y-1'>
                 {suggestions.map((suggestion, index) => (
                   <li key={index} className='flex items-center justify-center gap-2'>
-                    <div className='w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0' />
+                    <div className='w-1.5 h-1.5 rounded-full bg-primary shrink-0' />
                     {suggestion}
                   </li>
                 ))}
